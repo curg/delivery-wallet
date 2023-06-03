@@ -5,6 +5,7 @@ import React from "react";
 import Profile from "../buttons/Profile";
 import Chevron from "../icons/Chevron";
 import ConnectWallet from "../buttons/ConnectWallet";
+import Logo from "../logo/Logo";
 
 const Header = () => {
   const { isConnected, walletAddress } = useConnectWallet();
@@ -18,17 +19,17 @@ const Header = () => {
   };
 
   return (
-    <section className="overflow-hidden w-4/5 mx-auto">
-      <div className={`flex items-center justify-between py-4`}>
+    <section className="w-full py-1 px-28 mx-auto bg-black">
+      <div className={`flex items-center justify-between`}>
         <div className="w-auto">
           <div className="flex flex-wrap items-center">
-            <p className=" text-3xl font-medium">Delivery Wallet</p>
+            <Logo />
           </div>
         </div>
         <div className="w-auto">
           <div className="flex flex-wrap items-center">
             {isConnected ? (
-              <div className="flex items-center w-auto py-3 px-6 rounded-3xl border-[1px] border-black">
+              <div className="flex items-center w-auto py-3 px-6 rounded-3xl bg-white border-[1px] border-black">
                 <Profile />
                 <p className=" mx-3 font-heading text-lg">
                   {shortenAddress(walletAddress)}
