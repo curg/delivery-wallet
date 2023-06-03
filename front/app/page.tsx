@@ -1,5 +1,5 @@
 import React from "react";
-import { assets } from "../config/assets";
+import { assets } from "../config/assets.config";
 import AAAssetsContainer from "@/components/aaAssetsBlock/AAAssetsContainer";
 import UserAssetContainer from "@/components/assetsBlock/UserAssetContainer";
 
