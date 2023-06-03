@@ -12,7 +12,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Recoil>
-          <div className="h-screen flex flex-col justify-between">
+          <div className="flex flex-col justify-between">
             <Header />
             {children}
             <Footer />
