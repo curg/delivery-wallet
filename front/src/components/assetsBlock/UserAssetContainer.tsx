@@ -24,7 +24,7 @@ const UserAssetContainer = ({ assets }: Props) => {
           <span>NFTs</span>
         </div>
       </div>
-      {assets.map((assets, idx) => {
+      {assets?.map((assets, idx) => {
         return (
           <AssetsBlocks
             key={idx}
