@@ -15,7 +15,7 @@ type Props = {
 
 const UserAssetContainer = ({ assets }: Props) => {
   return (
-    <div className="min-h-[500px] mt-3 border rounded-lg relative">
+    <div className="min-h-[450px] mt-3 border rounded-lg relative">
       <div className="flex justify-between items-center p-5 text-gray-400">
         <p className="text-sm">Chain</p>
         <div className="text-xs">

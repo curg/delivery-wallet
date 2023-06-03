@@ -55,8 +55,22 @@ const AAAssetsContainer = () => {
   };
 
   return (
-    <div className="min-h-[450px] mt-3 flex justify-center items-center rounded-lg bg-purple-50">
-      <div className="text-white">{shortenAddress(aaWalletAddress)}</div>
+    <div className="w-full min-h-[450px] mt-3 rounded-lg bg-purple-50 px-4">
+      <div className="w-full flex justify-between items-center">
+        <div className="text-white flex items-center">
+          <p className="mr-2 font-semibold">Address: </p>
+          {shortenAddress(aaWalletAddress)}
+        </div>
+        <div className="flex justify-between items-center p-5 text-gray-400">
+          <div className="text-xs">
+            <span>All</span>
+            <span className="mx-4">/</span>
+            <span>Token</span>
+            <span className="mx-4">/</span>
+            <span>NFTs</span>
+          </div>
+        </div>
+      </div>
       {aaWalletAddress === "" && (
         <ConnectWallet
           onClick={handleCreateWallet}

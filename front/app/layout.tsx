@@ -15,7 +15,7 @@ export default function RootLayout({
         <Recoil>
           <div className="flex flex-col justify-between h-screen">
             <Header />
-            {children}
+              {children}
             <Footer />
           </div>
         </Recoil>
