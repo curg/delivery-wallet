@@ -3,6 +3,7 @@ package curg.ethseoul023.Service;
 import curg.ethseoul023.Domain.Approve;
 import curg.ethseoul023.Domain.Wallet;
 import curg.ethseoul023.Repository.MongoDBRepository;
+import org.springframework.data.util.Pair;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -73,7 +74,7 @@ public class ApproveService {
         return "0x000";
     }
 
-    public String executeTransfer(@RequestBody Approve _approve) throws Exception {
+    public Pair<Boolean, String> executeTransfer(@RequestBody Approve _approve) throws Exception {
 
         String eoaAddress = _approve.getEoaAddress();
         int chainIdx = _approve.getChainIdx();
@@ -90,7 +91,7 @@ public class ApproveService {
         String toAddress = IsExistaaAddress(eoaAddress); // aa 컨트랙트 주소
         if (toAddress == null) {
             System.out.println("지갑을 못찾았습니다");
-            return "No EOA Wallet";
+            return Pair.of(false, "No EOA Wallet");
         }
 
         EthGetTransactionCount ethGetTransactionCount = web3j.ethGetTransactionCount(credentials.getAddress(), DefaultBlockParameterName.LATEST).send();
@@ -112,7 +113,10 @@ public class ApproveService {
         EthSendTransaction ethSendTransaction = web3j.ethSendRawTransaction(hexValue).sendAsync().get();
         String transactionHash = ethSendTransaction.getTransactionHash();
 //        System.out.println(transactionHash);
-        return transactionHash;
+        if (transactionHash == null) {
+            return Pair.of(false, ethSendTransaction.getError().toString());
+        }
+        return Pair.of(true, transactionHash);
     }
 
 }
