@@ -2,7 +2,7 @@ import React from "react";
 import IconByToken from "./IconByToken";
 import { Assets } from "./UserAssetContainer";
 
-const AssetsBlocks = ({ ticker, network, ammount, setIsOpen }: Assets) => {
+const AssetsBlocks = ({ ticker, network, amount, setIsOpen }: Assets) => {
   return (
     <div
       onClick={() => {
@@ -19,10 +19,10 @@ const AssetsBlocks = ({ ticker, network, ammount, setIsOpen }: Assets) => {
       </div>
       <div className="w-1/2 flex justify-end items-center">
         <p className="text-md font-medium">
-          {ammount.toString().split(".")[0]}.
+          {amount.toString().split(".")[0]}.
         </p>
         <p className="text-sm text-gray-400">
-          {ammount.toString().split(".")[1]}
+          {amount.toString().split(".")[1]}
         </p>
         <p className="text-md ml-2">{ticker}</p>
       </div>

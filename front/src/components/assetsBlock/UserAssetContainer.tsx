@@ -6,7 +6,7 @@ import { Modal } from "../modals";
 export type Assets = {
   ticker: string;
   network: string;
-  ammount: number;
+  amount: number;
   setIsOpen?: Dispatch<SetStateAction<boolean>>;
 };
 
@@ -35,7 +35,7 @@ const UserAssetContainer = ({ assets }: Props) => {
             key={idx}
             ticker={assets.ticker}
             network={assets.network}
-            ammount={assets.ammount}
+            amount={assets.amount}
             setIsOpen={setIsOpen}
           />
         );
