@@ -1,8 +1,8 @@
 "use client";
 import React, { useCallback } from "react";
 import ConnectWallet from "../buttons/ConnectWallet";
-import { useRecoilState } from "recoil";
-import { walletStateAtom } from "@/states/globalAtom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { isTransferAtom, walletStateAtom } from "@/states/globalAtom";
 import { ethers } from "ethers";
 import {
   entryPoint,
@@ -17,6 +17,9 @@ import AAAssetsBlocks from "./AAAssetsBlocks";
 const AAAssetsContainer = () => {
   const [{ eoaWalletAddress, aaWalletAddress, signingKey }, setWalletState] =
     useRecoilState(walletStateAtom);
+  const isTransfer = useRecoilValue(isTransferAtom);
+
+  console.log("isTransfer", isTransfer);
 
   const postWalletAddress = useCallback(async () => {
     const fetchResult = await fetch(`${BASE_URL}/addAddress`, {
@@ -77,7 +80,8 @@ const AAAssetsContainer = () => {
           onClick={handleCreateWallet}
           content="Create AA Wallet"
         />
-      ) : (
+      )}
+      {isTransfer && (
         <AAAssetsBlocks
           ticker={"CURG"}
           network={"CURG"}

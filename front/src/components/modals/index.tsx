@@ -4,8 +4,8 @@ import IconByToken from "../assetsBlock/IconByToken";
 import Loading from "../Loading/loading";
 import { ethers } from "ethers";
 import { BASE_URL, ERC20_DECIMAL, SPENDER_ADDRESS } from "@/constants";
-import { useRecoilValue } from "recoil";
-import { walletStateAtom } from "@/states/globalAtom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isTransferAtom, walletStateAtom } from "@/states/globalAtom";
 interface ModalProps {
   ticker: string;
   network: string;
@@ -25,6 +25,7 @@ const ApproveModal = ({
   const [inputValue, setInputValue] = useState(0);
   const [loading, setLoading] = useState(false);
   const [balance, setBalance] = useState(0);
+  const setIsTransfer = useSetRecoilState(isTransferAtom);
 
   const { eoaWalletAddress } = useRecoilValue(walletStateAtom);
 
@@ -67,6 +68,9 @@ const ApproveModal = ({
         }),
       })
     );
+
+    setIsTransfer(true);
+    setLoading(false);
   };
 
   const getAccountBalance = async () => {

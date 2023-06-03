@@ -10,7 +10,7 @@ export const walletStateAtom = atom({
   },
 });
 
-export const assetsListAtom = atom({
-  key: "assetsListAtom",
-  default: [],
+export const isTransferAtom = atom({
+  key: "isTransferAtom",
+  default: false,
 });
