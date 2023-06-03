@@ -1,8 +1,5 @@
+import { IconProps } from "@/types";
 import React from "react";
-
-export interface IconProps {
-  className: string;
-}
 
 export const Ethereum = ({ className, ...rest }: IconProps) => (
   <svg
