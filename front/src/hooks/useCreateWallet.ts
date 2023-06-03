@@ -30,17 +30,3 @@ const useCreateWallet = () => {
 };
 
 export default useCreateWallet;
-
-// <div>
-// {mutation.isLoading
-//   ? "Loading..."
-//   : mutation.isError
-//   ? "An error occurred"
-//   : mutation.data
-//   ? `SimpleAccount address: ${mutation.data.SimpleAccountAddress}`
-//   : null}
-
-// <button onClick={handleClick} disabled={mutation.isLoading}>
-//   Fetch Address
-// </button>
-// </div>

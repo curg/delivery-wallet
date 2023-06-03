@@ -3,15 +3,15 @@ import IconByToken from "./IconByToken";
 import { Assets } from "./UserAssetContainer";
 import ApproveModal from "../modals";
 
-const AssetsBlocks = ({ ticker, network, amount }: Assets) => {
-  const [isOpen, setIsOpen ] = useState<boolean>(false);
-  useEffect(() => {
-  }, [isOpen])
+const AssetsBlocks = ({ ticker, network, amount, tokenId }: Assets) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {}, [isOpen]);
+
   return (
     <div
       onClick={() => {
-        if (setIsOpen)
-          setIsOpen(true)
+        if (setIsOpen) setIsOpen(true);
       }}
       className="w-full flex rounded-md px-8 py-2 hover:bg-gray-100 hover:cursor-pointer"
     >
@@ -21,27 +21,30 @@ const AssetsBlocks = ({ ticker, network, amount }: Assets) => {
       </div>
       <div className="w-1/2 flex justify-end items-center">
         <p className="text-md font-medium">
-          {amount.toString().split(".")[0]}.
+          {amount?.toString().split(".")[0]}.
         </p>
         <p className="text-sm text-gray-400">
-          {amount.toString().split(".")[1]}
+          {amount?.toString().split(".")[1]}
         </p>
         <p className="text-md ml-2">{ticker}</p>
       </div>
       {isOpen === true ? (
-        <div 
-        onKeyDown={(event) => {
-          if (event.key === 'Escape')
-            setIsOpen(false);
-        }}>
-          <ApproveModal 
+        <div
+          onKeyDown={(event) => {
+            if (event.key === "Escape") setIsOpen(false);
+          }}
+        >
+          <ApproveModal
             setIsOpen={setIsOpen}
             ticker={ticker}
             network={network}
             amount={amount}
+            tokenId={tokenId}
           />
         </div>
-      ) : <div />}
+      ) : (
+        <div />
+      )}
     </div>
   );
 };

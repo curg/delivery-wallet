@@ -4,16 +4,17 @@ import { Wallet } from "../icons/Wallet";
 
 type ConnectWalletProps = {
   onClick?: ClickHandler;
+  content: string;
 };
 
-const ConnectWallet = ({ onClick }: ConnectWalletProps) => {
+const ConnectWallet = ({ onClick, content }: ConnectWalletProps) => {
   return (
     <button
       onClick={onClick}
-      className=" bg-dark-200 items-center flex rounded-3xl py-3 px-10"
+      className=" bg-dark-200 items-center flex rounded-3xl py-3 px-6"
     >
       <Wallet className="" />
-      <p className="ml-2 text-white">Connect Wallet</p>
+      <p className="ml-2 text-white">{content}</p>
     </button>
   );
 };
