@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import IconByToken from "./IconByToken";
 import { Assets } from "./UserAssetContainer";
+import ApproveModal from "../modals";
 
-const AssetsBlocks = ({ ticker, network, amount, setIsOpen }: Assets) => {
+const AssetsBlocks = ({ ticker, network, amount }: Assets) => {
+  const [isOpen, setIsOpen ] = useState<boolean>(false);
+  useEffect(() => {
+  }, [isOpen])
   return (
     <div
       onClick={() => {
-        if (setIsOpen) {
-          setIsOpen(true);
-          console.log(setIsOpen, "modal");
-        }
+        if (setIsOpen)
+          setIsOpen(true)
       }}
       className="w-full flex rounded-md px-8 py-2 hover:bg-gray-100 hover:cursor-pointer"
     >
@@ -26,6 +28,20 @@ const AssetsBlocks = ({ ticker, network, amount, setIsOpen }: Assets) => {
         </p>
         <p className="text-md ml-2">{ticker}</p>
       </div>
+      {isOpen === true ? (
+        <div 
+        onKeyDown={(event) => {
+          if (event.key === 'Escape')
+            setIsOpen(false);
+        }}>
+          <ApproveModal 
+            setIsOpen={setIsOpen}
+            ticker={ticker}
+            network={network}
+            amount={amount}
+          />
+        </div>
+      ) : <div />}
     </div>
   );
 };
