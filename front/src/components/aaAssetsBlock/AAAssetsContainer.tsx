@@ -81,6 +81,7 @@ const AAAssetsContainer = () => {
           content="Create AA Wallet"
         />
       )}
+
       {isTransfer && (
         <AAAssetsBlocks
           ticker={"CURG"}
@@ -90,6 +91,7 @@ const AAAssetsContainer = () => {
           tokenAddress={"1234"}
         />
       )}
+
     </div>
   );
 };

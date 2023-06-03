@@ -4,6 +4,7 @@ import IconByToken from "../assetsBlock/IconByToken";
 import Loading from "../Loading/loading";
 import { ethers } from "ethers";
 import { BASE_URL, ERC20_DECIMAL, SPENDER_ADDRESS } from "@/constants";
+
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isTransferAtom, walletStateAtom } from "@/states/globalAtom";
 interface ModalProps {
@@ -51,6 +52,32 @@ const ApproveModal = ({
   const handleApprove = async () => {
     await tokenContract.approve(SPENDER_ADDRESS, amountToApprove);
 
+
+  const { eoaWalletAddress } = useRecoilValue(walletStateAtom);
+
+  const tokenAbi = [
+    "function approve(address spender, uint256 amount) public returns(bool)",
+  ];
+  const { ethereum } = window;
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  const signer = provider.getSigner();
+
+  const tokenContract = new ethers.Contract(tokenAddress, tokenAbi, signer);
+
+  const amountToApprove = ethers.utils.parseUnits(
+    amount.toString(),
+    ERC20_DECIMAL
+  );
+
+  const handleCancel = async () => {
+    console.log("clicked cancel");
+    setIsOpen(false);
+  };
+
+  const handleApprove = async () => {
+    await tokenContract.approve(SPENDER_ADDRESS, amountToApprove);
+
+
     setLoading(true);
     setIsOpen(false);
 
@@ -69,8 +96,10 @@ const ApproveModal = ({
       })
     );
 
+
     setIsTransfer(true);
     setLoading(false);
+
   };
 
   const getAccountBalance = async () => {

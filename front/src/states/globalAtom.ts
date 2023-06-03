@@ -7,6 +7,8 @@ export const walletStateAtom = atom({
     eoaWalletAddress: "",
     signingKey: "",
     aaWalletAddress: "",
+    networkId: "",
+    networkName: "",
   },
 });
 
