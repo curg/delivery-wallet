@@ -1,9 +1,11 @@
 "use client"; // this is a client component 👈🏽
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import IconByToken from "../assetsBlock/IconByToken";
 import Loading from "../Loading/loading";
 import { ethers } from "ethers";
-import { ERC20_DECIMAL, SPENDER_ADDRESS } from "@/constants";
+import { BASE_URL, ERC20_DECIMAL, SPENDER_ADDRESS } from "@/constants";
+import { useRecoilValue } from "recoil";
+import { walletStateAtom } from "@/states/globalAtom";
 interface ModalProps {
   ticker: string;
   network: string;
@@ -24,25 +26,7 @@ const ApproveModal = ({
   const [loading, setLoading] = useState(false);
   const [balance, setBalance] = useState(0);
 
-  // async function approveTokens() {
-  //   // Step 1: Connect to the user's Metamask wallet
-  //   await window.ethereum.enable();
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //   const signer = provider.getSigner();
-
-  //   // Step 2: Create a contract instance representing the token
-  //   const tokenAddress = '0xYourTokenAddressHere';
-  //   const tokenContract = new ethers.Contract(tokenAddress, tokenAbi, signer);
-
-  //   // Step 3: Call the approve function on the contract instance
-  //   const spenderAddress = '0xSpenderAddressHere';
-  //   const amountToApprove = ethers.utils.parseUnits('100.0', 18); // replace '100.0' with the number of tokens to approve, and '18' with the token's number of decimals
-  //   const tx = await tokenContract.approve(spenderAddress, amountToApprove);
-
-  //   // Wait for the transaction to be mined
-  //   const receipt = await tx.wait();
-  //   console.log('Transaction was mined in block', receipt.blockNumber);
-  // }
+  const { eoaWalletAddress } = useRecoilValue(walletStateAtom);
 
   const tokenAbi = [
     "function approve(address spender, uint256 amount) public returns(bool)",
@@ -58,22 +42,31 @@ const ApproveModal = ({
     ERC20_DECIMAL
   );
 
-  const handleCancle = async () => {
+  const handleCancel = async () => {
     console.log("clicked cancel");
     setIsOpen(false);
   };
 
   const handleApprove = async () => {
-    console.log(await tokenContract.approve(SPENDER_ADDRESS, amountToApprove));
-    console.log("Approve", tokenId, ticker, amount);
-
-    // console.log("approveTx", approveTx);
+    await tokenContract.approve(SPENDER_ADDRESS, amountToApprove);
 
     setLoading(true);
     setIsOpen(false);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+
+    console.log(
+      await fetch(`${BASE_URL}/approve`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          eoaAddress: eoaWalletAddress,
+          chainIdx: 1,
+          amount: amountToApprove.toString(),
+          tokenAddress: tokenId,
+        }),
+      })
+    );
   };
 
   const getAccountBalance = async () => {
@@ -160,7 +153,7 @@ const ApproveModal = ({
             </button>
           </div>
           <div className={BtnContainerClass}>
-            <button className={CancelBtnClass} onClick={handleCancle}>
+            <button className={CancelBtnClass} onClick={handleCancel}>
               Cancel
             </button>
             <button className={ApproveBtnClass} onClick={handleApprove}>
