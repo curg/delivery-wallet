@@ -4,6 +4,7 @@ import { shortenAddress } from "@/utils/shortenAddress";
 import React from "react";
 import Profile from "../buttons/Profile";
 import Chevron from "../icons/Chevron";
+import ConnectWallet from "../buttons/ConnectWallet";
 
 const Header = () => {
   const { isConnected, walletAddress } = useConnectWallet();
@@ -35,12 +36,10 @@ const Header = () => {
                 <Chevron className="" />
               </div>
             ) : (
-              <button
+              <ConnectWallet
                 onClick={handleConnectWallet}
-                className="flex items-center w-auto py-3 px-6 rounded-3xl border-[1px] border-black"
-              >
-                <p className="m-auto font-heading text-lg">Connect Wallet</p>
-              </button>
+                content="Connect Wallet"
+              />
             )}
           </div>
         </div>
