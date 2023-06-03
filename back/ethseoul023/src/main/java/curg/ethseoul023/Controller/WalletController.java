@@ -38,7 +38,7 @@ public class WalletController {
     }
 
     @GetMapping("/asset")
-    public List<Asset> getAsset(@RequestParam String address, int chainIdx) throws ExecutionException, InterruptedException {
+    public List<String> getAsset(@RequestParam String address, int chainIdx) throws ExecutionException, InterruptedException, IOException {
         return walletService.getAssets(address,chainIdx);
     }
 }
