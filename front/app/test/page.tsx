@@ -1,10 +1,13 @@
 import React from 'react'
-import { ETH } from '@/components/icons'
+import { Ethereum, Polygon, USDC, USDT } from '@/components/icons'
 
 const Test = () => {
   return (
     <div>
-      <ETH className='' />      
+      <Ethereum className='' />
+      <Polygon className='' />
+      <USDC className='' />
+      <USDT className='' />
     </div>
   )
 }
