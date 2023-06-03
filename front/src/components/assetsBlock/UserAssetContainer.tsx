@@ -6,6 +6,7 @@ export type Assets = {
   ticker: string;
   network: string;
   amount: number;
+  tokenId: number;
 };
 
 type Props = {
@@ -32,6 +33,7 @@ const UserAssetContainer = ({ assets }: Props) => {
             ticker={asset.ticker}
             network={asset.network}
             amount={asset.amount}
+            tokenId={asset.tokenId}
           />
         );
       })}
