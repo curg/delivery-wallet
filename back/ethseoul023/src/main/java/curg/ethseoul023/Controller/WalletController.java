@@ -12,7 +12,6 @@ public class WalletController {
 
     @Autowired
     private WalletService walletService;
-
     @GetMapping("/getAddress")
     public String getAddress(String _eoaAddress)
     {

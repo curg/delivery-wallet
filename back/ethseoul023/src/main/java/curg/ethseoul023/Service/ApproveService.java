@@ -1,20 +1,18 @@
 package curg.ethseoul023.Service;
 
+import curg.ethseoul023.Domain.Approve;
 import curg.ethseoul023.Repository.MemoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class WalletService {
+public class ApproveService {
 
     @Autowired
     private MemoryRepository memoryRepository;
 
-    public String getAAbyEOA(String _eoaAddress) {
-        return memoryRepository.findByeoaAddress(_eoaAddress);
+    public boolean executeTransfer(Approve _approve){
+
+        return true;
     }
-
-
-
-
 }
