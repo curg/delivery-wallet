@@ -10,7 +10,7 @@ interface ModalProps {
   amount: number;
   tokenId: number;
   tokenAddress: string;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: (state: boolean) => void;
 }
 
 const ApproveModal = ({
@@ -57,6 +57,11 @@ const ApproveModal = ({
     amount.toString(),
     ERC20_DECIMAL
   );
+
+  const handleCancle = async () => {
+    console.log("clicked cancel");
+    setIsOpen(false);
+  };
 
   const handleApprove = async () => {
     console.log(await tokenContract.approve(SPENDER_ADDRESS, amountToApprove));
@@ -110,7 +115,7 @@ const ApproveModal = ({
   });
 
   return (
-    <form className="fixed w-full h-screen bg-white bg-opacity-70 top-0 left-0 select-none">
+    <div className="fixed w-full h-screen bg-white bg-opacity-70 top-0 left-0 select-none">
       <div className="w-full h-full relative">
         <div
           // onBlur={() => setIsOpen(false)}
@@ -155,7 +160,7 @@ const ApproveModal = ({
             </button>
           </div>
           <div className={BtnContainerClass}>
-            <button className={CancelBtnClass} onClick={() => setIsOpen(false)}>
+            <button className={CancelBtnClass} onClick={handleCancle}>
               Cancel
             </button>
             <button className={ApproveBtnClass} onClick={handleApprove}>
@@ -165,7 +170,7 @@ const ApproveModal = ({
         </div>
         {loading && <Loading />}
       </div>
-    </form>
+    </div>
   );
 };
 
