@@ -10,12 +10,12 @@ public class MemoryRepository {
 
     HashMap<String,String> table = new HashMap<String,String>();
 
-    public String findByeoaAddress(String _eoaAddress){
-        return "aa";
+    public String getAddress(String eoa){
+        return table.get(eoa);
     }
 
-    public String addaaAddress(String _eoaAddress,String _aaAddress){
-        table.put(_eoaAddress,_aaAddress);
-        return _aaAddress;
+    public String addAddress(String eoa,String aa){
+        table.put(eoa,aa);
+        return aa;
     }
 }
