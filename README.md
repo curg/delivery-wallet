@@ -1,2 +1,2 @@
-# delivery-wallet-front
-ETH SEOUL 2023
+# delivery-wallet
+### ETH SEOUL 2023
