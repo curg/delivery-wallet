@@ -1,8 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
 
-Modal.setAppElement("#__next"); // this line is important to avoid accessibility issues
-
 interface CustomModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -23,6 +21,9 @@ const customStyles = {
     backgroundColor: "#8247E5",
     borderRadius: "20px",
     padding: "20px",
+    width: "500px",
+    height: "300px",
+    flex: "just",
   },
 };
 
@@ -36,7 +37,7 @@ const CustomModal = ({
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       style={customStyles}
-      contentLabel="Example Modal"
+      contentLabel="Modal"
     >
       {children}
     </Modal>
