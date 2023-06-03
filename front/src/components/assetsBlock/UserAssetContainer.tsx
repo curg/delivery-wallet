@@ -1,5 +1,5 @@
 "use client"; // this is a client component 👈🏽
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React from "react";
 import AssetsBlocks from "./AssetsBlocks";
 
 export type Assets = {
