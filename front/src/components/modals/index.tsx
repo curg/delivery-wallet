@@ -1,21 +1,30 @@
+"use client"; // this is a client component 👈🏽
 // pages/index.js
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import CustomModal from "./Modal";
+import IconByToken from "../assetsBlock/IconByToken";
+import Loading from "../Loading/loading";
 
-export default function Modal() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+interface ModalProps {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
   const [inputValue, setInputValue] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [balance, setBalance] = useState(0);
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
 
   const closeModal = () => {
-    setModalIsOpen(false);
+    setIsOpen(false);
   };
 
   const handleApporve = () => {
-    console.log("approve");
+    setLoading(true);
+    setIsOpen(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   };
   const getAccountBalance = async () => {
     return 1000; // replace with actual balance
@@ -40,10 +49,13 @@ export default function Modal() {
     }
   };
 
+  const handleMax = () => {
+    setInputValue(balance);
+  };
   //Btn Class
-  const BtnContainerClass = `flex justify-center items-center`;
-  const ApproveBtnClass = `boerder-2 text-white`;
-  const CancleBtnClass = `w-`;
+  const BtnContainerClass = `flex justify-center items-cente w-full  my-4`;
+  const ApproveBtnClass = `rounded-lg text-black bg-yellow-50 w-full px-2 py-2  hover:bg-purple-200 hover:cursor-pointer duration-10 `;
+  const CancleBtnClass = `rounded-lg text-white bg-purple-100 w-1/3 px-2 py-2 mx-2 hover:bg-purple-200 hover:text-purple-100 hover:cursor-pointer duration-100 `;
   //tokenName 정보 받아서 넣어야함
   const tokenName = "USDC";
   //tokenAmount 정보 받아서 넣어야함
@@ -67,40 +79,61 @@ export default function Modal() {
   //input에는 onChange Event 걸어서 유저가 input에 값을 넣을때마다 유저의 Balance와 비교해서 유저의 Balance보다 많다면 유저의 Balance의 량만큼 Input에 띄어주기
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
-      <CustomModal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <div className="flex justify-start items-center">
-          <h2>Asset Move Amount</h2>
-        </div>
-        {/* 토큰 이름과 토큰량이 표시되는곳 */}
-        <div>
-          <span>{`${tokenName} Token`}</span>
-          <span>{`${formattedNumber}`}</span>
-        </div>
-        {/* 얼마를 보낼지 입력하는곳 */}
-        <div>
-          <div>
-            <span>Enter Amount</span>
+      <CustomModal isOpen={isOpen} onRequestClose={closeModal}>
+        <div className="flex-col  justify-center h-full w-full ">
+          <div className="w-full ">
+            <h2 className="text-white ">Asset Move Amount</h2>
           </div>
-          {/* input쪽에 필요한 내용들
+
+          {/* 토큰 이름과 토큰량이 표시되는곳 */}
+          <div className="flex w-full h-[50px] my-5 items-center">
+            <IconByToken ticker={tokenName} />
+            <span className="ml-2 text-white flex-1 justify-center">{`${tokenName} Token`}</span>
+            <div className="">
+              <span className=" text-white w-full flex-3 justify-end text-md ml-6">
+                {" "}
+                {`${formattedNumber} `}
+              </span>
+              <span className="text-[0.2rem] text-[#9BA1A8]">{`${tokenName} `}</span>
+            </div>
+          </div>
+          {/* 얼마를 보낼지 입력하는곳 */}
+          <div className="flex justify-between w-full">
+            <div>
+              <span className=" ml-2 text-[0.5rem] text-white">
+                Enter Amount
+              </span>
+            </div>
+            {/* input쪽에 필요한 내용들
     1.현재 어카운트에 들어있는 벨런스 체크 tokenAmount량 체크
     */}
-          <input
-            type="number"
-            value={inputValue}
-            onChange={handleChange}
-            placeholder="Enter amount"
-          />
-        </div>
-        <div className={BtnContainerClass}>
-          <button className={CancleBtnClass} onClick={closeModal}>
-            Close
-          </button>
-          <button className={ApproveBtnClass} onClick={handleApporve}>
-            Approve
-          </button>
+            <input
+              type="text"
+              value={inputValue}
+              onChange={handleChange}
+              placeholder="Enter amount"
+              className="flex text-end w-3/4  rounded-lg px-4 py-2  focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <div className="w-full flex justify-end items-center mt-3">
+            <button
+              onClick={() => handleMax()}
+              className="text-white rounded-md bg-purple-100 text-[0.3rem] w-[40px] h-[20px] duration-100 hover:bg-purple-200 hover:text-purple-100 hover:cursor-pointer"
+            >
+              max
+            </button>
+          </div>
+          <div className={BtnContainerClass}>
+            <button className={CancleBtnClass} onClick={closeModal}>
+              Cancle
+            </button>
+            <button className={ApproveBtnClass} onClick={handleApporve}>
+              Approve
+            </button>
+          </div>
         </div>
       </CustomModal>
+      {loading && <Loading />}
     </div>
   );
-}
+};
