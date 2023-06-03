@@ -4,8 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class WalletDomain {
+public class Wallet {
     private String eoaAddress;
     private String aaAddress;
-
 }
