@@ -1,5 +1,4 @@
 import { ethers } from 'hardhat';
-import 'dotenv/config';
 
 async function main() {
   const DELIVERYWALLET = await ethers.getContractFactory('DeliveryWallet');
