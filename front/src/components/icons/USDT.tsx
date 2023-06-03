@@ -1,5 +1,5 @@
-import * as React from "react"
-import { IconProps } from "./Ethereum"
+import { IconProps } from "@/types";
+import * as React from "react";
 
 export const USDT = ({ className, ...rest }: IconProps) => (
   <svg
@@ -21,4 +21,4 @@ export const USDT = ({ className, ...rest }: IconProps) => (
       />
     </g>
   </svg>
-)
+);
