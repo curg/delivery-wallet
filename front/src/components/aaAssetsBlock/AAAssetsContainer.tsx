@@ -19,8 +19,6 @@ const AAAssetsContainer = () => {
     useRecoilState(walletStateAtom);
   const isTransfer = useRecoilValue(isTransferAtom);
 
-  console.log("isTransfer", isTransfer);
-
   const postWalletAddress = useCallback(async () => {
     const fetchResult = await fetch(`${BASE_URL}/addAddress`, {
       method: "POST",
@@ -59,7 +57,7 @@ const AAAssetsContainer = () => {
   };
 
   return (
-    <div className="w-full min-h-[450px] mt-3 rounded-lg bg-purple-50 px-4 relative">
+    <div className="w-full h-[60vh] mt-3 rounded-lg bg-purple-50 px-4 relative">
       <div className="w-full flex justify-between items-center">
         <div className="text-white flex items-center">
           <p className="mr-2 font-semibold">Address: </p>
@@ -67,11 +65,11 @@ const AAAssetsContainer = () => {
         </div>
         <div className="flex justify-between items-center p-5 text-gray-400">
           <div className="text-xs">
-            <span>All</span>
-            <span className="mx-4">/</span>
-            <span>Token</span>
-            <span className="mx-4">/</span>
-            <span>NFTs</span>
+            <span className=" text-white">All</span>
+            <span className="mx-4 text-white">/</span>
+            <span className=" text-white">Token</span>
+            <span className="mx-4 text-white">/</span>
+            <span className=" text-white">NFTs</span>
           </div>
         </div>
       </div>
