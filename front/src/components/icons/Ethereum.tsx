@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 export interface IconProps {
   className: string;
@@ -30,4 +30,4 @@ export const Ethereum = ({ className, ...rest }: IconProps) => (
     <path fill="#141414" d="M18.32 14.41v8.026l7.675-4.538-7.676-3.489Z" />
     <path fill="#393939" d="m18.319 14.41-7.676 3.488 7.676 4.538v-8.027Z" />
   </svg>
-)
+);
