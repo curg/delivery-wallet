@@ -1,7 +1,8 @@
 "use client"; // this is a client component 👈🏽
-import React from "react";
+import React, { use } from "react";
 import AssetsBlocks from "./AssetsBlocks";
-
+import { useRecoilValue } from "recoil";
+import { walletStateAtom } from "@/states/globalAtom";
 export type Assets = {
   ticker: string;
   network: string;
@@ -15,10 +16,11 @@ type Props = {
 };
 
 const UserAssetContainer = ({ assets }: Props) => {
+  const walletState = useRecoilValue(walletStateAtom);
   return (
     <div className="min-h-[500px] mt-3 border rounded-lg relative">
       <div className="flex justify-between items-center p-5 text-gray-400">
-        <p className="text-sm">Chain</p>
+        <p className="text-sm">{walletState.networkName || "Chain"}</p>
         <div className="text-xs">
           <span>All</span>
           <span className="mx-4">/</span>

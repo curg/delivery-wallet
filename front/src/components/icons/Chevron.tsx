@@ -1,6 +1,11 @@
-import { IconProps } from "@/types";
 
-const Chevron = ({ className, ...rest }: IconProps) => (
+
+export type ChevronIconProps = {
+  className: string;
+  onClick: () => void;
+};
+
+const Chevron = ({ className, ...rest }: ChevronIconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={18}
