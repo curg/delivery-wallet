@@ -13,8 +13,9 @@ public class WalletController {
     @Autowired
     private WalletService walletService;
 
-    @GetMapping("/")
-    public String addWallet(){
-        return "a";
+    @GetMapping("/getAddress")
+    public String getAddress(String _eoaAddress)
+    {
+        return walletService.getAAbyEOA(_eoaAddress);
     }
 }

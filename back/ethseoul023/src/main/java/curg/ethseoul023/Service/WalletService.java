@@ -10,4 +10,7 @@ public class WalletService {
     @Autowired
     private MemoryRepository memoryRepository;
 
+    public String getAAbyEOA(String _eoaAddress) {
+        return memoryRepository.findByeoaAddress(_eoaAddress);
+    }
 }
