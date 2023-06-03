@@ -1,5 +1,11 @@
-import { ETH } from "./ETH";
+import { Ethereum } from "./Ethereum";
+import { Polygon } from "./Polygon";
+import { USDC } from "./USDC";
+import { USDT } from "./USDT";
 
-export{
-  ETH
+export {
+  Ethereum,
+  Polygon,
+  USDC,
+  USDT
 }

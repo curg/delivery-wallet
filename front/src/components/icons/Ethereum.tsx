@@ -1,10 +1,10 @@
 import React from "react"
 
-interface IconProps {
+export interface IconProps {
   className: string;
 }
 
-export const ETH = ({ className, ...rest }: IconProps) => (
+export const Ethereum = ({ className, ...rest }: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={36}
