@@ -4,11 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class Approve {
-
-    private String eoaAddress;
-    private int chainIdx;
+public class Asset {
     private String amount;
-    private String tokenAddress;
-
+    private String ticker;
+    private int tokenIdx;
+    private String value;
 }
