@@ -32,12 +32,12 @@ export const useConnectWallet = () => {
         console.log("chainChanged", chainId);
       });
 
-      const provider = new ethers.BrowserProvider(ethereum);
+      const provider = new ethers.providers.Web3Provider(ethereum);
 
       (async () => {
         const accounts = await provider.listAccounts();
         if (accounts.length > 0) {
-          setAddress(accounts[0].address);
+          setAddress(accounts[0]);
           setConnected(true);
         }
       })();
