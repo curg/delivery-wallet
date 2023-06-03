@@ -1,9 +1,11 @@
-import { useState } from "react";
+// pages/index.js
+import { useEffect, useState } from "react";
 import CustomModal from "./Modal";
 
 export default function Modal() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const [inputValue, setInputValue] = useState(0);
+  const [balance, setBalance] = useState(0);
   const openModal = () => {
     setModalIsOpen(true);
   };
@@ -15,6 +17,29 @@ export default function Modal() {
   const handleApprove = () => {
     console.log("approve");
   };
+  const getAccountBalance = async () => {
+    return 1000; // replace with actual balance
+  };
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      const accountBalance = await getAccountBalance();
+      setBalance(accountBalance);
+    };
+    fetchBalance();
+  }, []);
+
+  const handleChange = (event: { target: { value: string } }) => {
+    const enteredValue = parseFloat(event.target.value);
+    if (isNaN(enteredValue)) {
+      setInputValue(0);
+    } else if (enteredValue > balance) {
+      setInputValue(balance);
+    } else {
+      setInputValue(enteredValue);
+    }
+  };
+
   //Btn Class
   const BtnContainerClass = `flex justify-center items-center`;
   const ApproveBtnClass = `border-2 text-white`;
@@ -47,11 +72,26 @@ export default function Modal() {
         <div className="flex justify-start items-center">
           <h2>Asset Move Amount</h2>
         </div>
+        {/* 토큰 이름과 토큰량이 표시되는곳 */}
         <div>
           <span>{`${tokenName} Token`}</span>
           <span>{`${formattedNumber}`}</span>
         </div>
-
+        {/* 얼마를 보낼지 입력하는곳 */}
+        <div>
+          <div>
+            <span>Enter Amount</span>
+          </div>
+          {/* input쪽에 필요한 내용들
+    1.현재 어카운트에 들어있는 벨런스 체크 tokenAmount량 체크
+    */}
+          <input
+            type="number"
+            value={inputValue}
+            onChange={handleChange}
+            placeholder="Enter amount"
+          />
+        </div>
         <div className={BtnContainerClass}>
           <button className={CancleBtnClass} onClick={closeModal}>
             Close
