@@ -55,7 +55,7 @@ const AAAssetsContainer = () => {
   };
 
   return (
-    <div className="w-full min-h-[450px] mt-3 rounded-lg bg-purple-50 px-4">
+    <div className="w-full min-h-[450px] mt-3 rounded-lg bg-purple-50 px-4 relative">
       <div className="w-full flex justify-between items-center">
         <div className="text-white flex items-center">
           <p className="mr-2 font-semibold">Address: </p>
