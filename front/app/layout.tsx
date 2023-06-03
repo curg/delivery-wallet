@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Recoil from "@/components/Recoil";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";

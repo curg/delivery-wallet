@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import IconByToken from "./IconByToken";
 import { Assets } from "./UserAssetContainer";
 import ApproveModal from "../modals";
+import { useRecoilValue } from "recoil";
+import { isTransferAtom } from "@/states/globalAtom";
 
 const AssetsBlocks = ({
   ticker,
@@ -11,6 +13,7 @@ const AssetsBlocks = ({
   tokenAddress,
 }: Assets) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const isTransfer = useRecoilValue(isTransferAtom);
 
   const handleIsOpen = (state: boolean) => {
     console.log(`prev-isOpen : ${isOpen} -> next-isOpen : ${state}`);
@@ -31,13 +34,20 @@ const AssetsBlocks = ({
         <p className="ml-2">{network}</p>
       </div>
       <div className="w-1/2 flex justify-end items-center">
-        <p className="text-md font-medium">
-          {amount?.toString().split(".")[0]}.
-        </p>
-        <p className="text-sm text-gray-400">
-          {amount?.toString().split(".")[1]}
-        </p>
-        <p className="text-md ml-2">{ticker}</p>
+        {ticker === "CURG" && isTransfer === true ? (
+          <>
+            <p className="text-md font-medium">0</p>
+          </>
+        ) : (
+          <>
+            <p className="text-md font-medium">
+              {amount?.toString().split(".")[0]}.
+            </p>
+            <p className="text-sm text-gray-400">
+              {amount?.toString().split(".")[1]}
+            </p>
+          </>
+        )}
       </div>
       {isOpen === true ? (
         <div

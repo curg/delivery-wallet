@@ -7,8 +7,9 @@ export type Assets = {
   ticker: string;
   network: string;
   amount: number;
-  tokenId?: number;
-  tokenAddress?: string;
+  tokenId: number;
+  tokenAddress: string;
+
 };
 
 type Props = {
@@ -18,7 +19,7 @@ type Props = {
 const UserAssetContainer = ({ assets }: Props) => {
   const walletState = useRecoilValue(walletStateAtom);
   return (
-    <div className="min-h-[500px] mt-3 border rounded-lg relative">
+    <div className="h-[50vh] mt-3 border rounded-lg relative">
       <div className="flex justify-between items-center p-5 text-gray-400">
         <p className="text-sm">{walletState.networkName || "Chain"}</p>
         <div className="text-xs">

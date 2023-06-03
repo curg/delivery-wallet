@@ -5,8 +5,12 @@ import React, { useState } from "react";
 import Profile from "../buttons/Profile";
 import Chevron from "../icons/Chevron";
 import ConnectWallet from "../buttons/ConnectWallet";
+
 import { useRecoilState } from "recoil";
 import { walletStateAtom } from "@/states/globalAtom";
+
+import Logo from "../logo/Logo";
+
 const Header = () => {
   const { isConnected, walletAddress } = useConnectWallet();
   const [showNetworks, setShowNetworks] = useState(false);
@@ -78,6 +82,7 @@ const Header = () => {
   ];
 
   return (
+
     <section className="overflow-hidden w-4/5 mx-auto">
       {/* ... existing code ... */}
       {isConnected ? (
@@ -103,6 +108,7 @@ const Header = () => {
               ))}
             </div>
           )}
+
         </div>
       ) : (
         <ConnectWallet onClick={handleConnectWallet} content="Connect Wallet" />
