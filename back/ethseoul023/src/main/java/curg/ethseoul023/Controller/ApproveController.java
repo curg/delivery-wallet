@@ -13,7 +13,7 @@ public class ApproveController {
     @Autowired
     private ApproveService approveService;
 
-    @PostMapping
+    @PostMapping("/approve")
     public boolean signalApprove(Approve _approve){
         return approveService.executeTransfer(_approve);
     }
