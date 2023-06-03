@@ -30,14 +30,16 @@ export const useConnectWallet = () => {
         if (accounts.length > 0) {
           setWalletState({
             isConnected: true,
-            walletAddress: accounts[0],
+            eoaWalletAddress: accounts[0],
             signingKey: privateKey,
+            aaWalletAddress: "",
           });
         } else {
           setWalletState({
             isConnected: false,
-            walletAddress: "",
+            eoaWalletAddress: "",
             signingKey: "",
+            aaWalletAddress: "",
           });
         }
       });
@@ -53,8 +55,9 @@ export const useConnectWallet = () => {
         if (accounts.length > 0) {
           setWalletState({
             isConnected: true,
-            walletAddress: accounts[0],
+            eoaWalletAddress: accounts[0],
             signingKey: privateKey,
+            aaWalletAddress: "",
           });
         }
       })();
@@ -70,6 +73,6 @@ export const useConnectWallet = () => {
 
   return {
     isConnected: walletState.isConnected,
-    walletAddress: walletState.walletAddress,
+    walletAddress: walletState.eoaWalletAddress,
   };
 };
