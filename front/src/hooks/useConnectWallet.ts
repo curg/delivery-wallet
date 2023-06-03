@@ -1,5 +1,7 @@
+import { useRecoilState } from "recoil";
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { walletStateAtom } from "@/states/globalAtom";
 
 declare global {
   interface Window {
@@ -8,8 +10,7 @@ declare global {
 }
 
 export const useConnectWallet = () => {
-  const [connected, setConnected] = useState(false);
-  const [address, setAddress] = useState("");
+  const [walletState, setWalletState] = useRecoilState(walletStateAtom);
 
   useEffect(() => {
     const connectWallet = async () => {
@@ -20,11 +21,15 @@ export const useConnectWallet = () => {
 
       ethereum?.on("accountsChanged", (accounts: string[]) => {
         if (accounts.length > 0) {
-          setAddress(accounts[0]);
-          setConnected(true);
+          setWalletState({
+            isConnected: true,
+            walletAddress: accounts[0],
+          });
         } else {
-          setAddress("");
-          setConnected(false);
+          setWalletState({
+            isConnected: false,
+            walletAddress: "",
+          });
         }
       });
 
@@ -37,8 +42,10 @@ export const useConnectWallet = () => {
       (async () => {
         const accounts = await provider.listAccounts();
         if (accounts.length > 0) {
-          setAddress(accounts[0]);
-          setConnected(true);
+          setWalletState({
+            isConnected: true,
+            walletAddress: accounts[0],
+          });
         }
       })();
 
@@ -49,10 +56,10 @@ export const useConnectWallet = () => {
     };
 
     connectWallet();
-  }, []);
+  }, [setWalletState]);
 
   return {
-    connected,
-    address,
+    isConnected: walletState.isConnected,
+    walletAddress: walletState.walletAddress,
   };
 };
