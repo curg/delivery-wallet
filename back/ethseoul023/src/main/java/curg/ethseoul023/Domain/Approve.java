@@ -8,8 +8,7 @@ import lombok.Setter;
 public class Approve {
 
     private String eoaAddress;
-    private int chainIdx;
-    private String amount;
-    private String tokenAddress;
-
+    private int chainIdx; // 1 2 3
+    private String amount; // 양
+    private int tokenIdx;
 }

@@ -35,10 +35,10 @@ public class ApproveService {
     public String IsExistaaAddress(String eoaAddress) {
 
         Wallet wallet = memoryRepository.findByEoaAddress(eoaAddress);
-        if (wallet.getAaAddress() == null) {
+        if (wallet.getEoa() == null) {
             return "0x000";
         }
-        return wallet.getAaAddress();
+        return wallet.getAa();
     }
 
     public boolean executeTransfer(@RequestBody Approve _approve) throws Exception {

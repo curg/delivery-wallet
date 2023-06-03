@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter @Setter
 public class Wallet {
-    private String eoaAddress;
-    private String aaAddress;
+    private String eoa;
+    private String aa;
 }
