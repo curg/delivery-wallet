@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "description": "Delivery Wallet suport to transfer from assets of eoa to acount abstration wallet",
   "scripts": {
-    "build": "npx hardhat compile",
-    "test": "npx hardhat test"
+    "build": "npx hardhat compile; cp artifacts/contracts/DeliveryWallet.sol/DeliveryWallet.json ./abi/",
+    "test": "npx hardhat test",
+    "clean": "npx hardhat clean"
   },
   "repository": {
     "type": "git",
