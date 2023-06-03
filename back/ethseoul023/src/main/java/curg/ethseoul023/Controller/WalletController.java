@@ -18,15 +18,15 @@ public class WalletController {
     @Autowired
     private WalletService walletService;
     @GetMapping("/getAddress")
-    public String getAddress(@RequestParam String _eoaAddress)
+    public String getAddress(@RequestParam String eoa)
     {
-        return walletService.getAAbyEOA(_eoaAddress);
+        return walletService.getAAbyEOA(eoa);
     }
 
     @PostMapping("/addAddress")
     public String addAddress(Wallet form)
     {
-        return walletService.addAddress(form.getEoaAddress(),form.getAaAddress());
+        return walletService.addAddress(form.getEoa(),form.getAa());
     }
 
 }

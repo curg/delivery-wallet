@@ -23,4 +23,5 @@ public class WalletService {
     public String addAddress(String eoa,String aa){
         return memoryRepository.addAddress(eoa,aa);
     }
+
 }
