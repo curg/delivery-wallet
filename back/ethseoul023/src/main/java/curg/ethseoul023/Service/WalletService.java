@@ -55,13 +55,17 @@ public class WalletService {
                 "0x0d1FCB66050EE7a14FF4B9a2bf499f521BbA41bD",
                 owner
         );
+
+
         int i;
-        for( i=1; i<=5; i++)
+        for( i=0; i<4; i++)
         {
             String amount = chainRepository.getTokenAmount(
                     tokenAddresses.get(i),
                     owner
             );
+
+            amount = amount.substring(2,amount.length());
             BigInteger result = new BigInteger(amount,16);
             list.add(result.toString());
         }
