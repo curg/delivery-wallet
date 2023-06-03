@@ -1,5 +1,4 @@
 import { ClickHandler } from "@/types";
-
 import React from "react";
 import { Wallet } from "../icons/Wallet";
 
