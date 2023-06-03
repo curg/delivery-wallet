@@ -1,6 +1,6 @@
 import { ClickHandler } from "@/types";
-import { Wallet } from "../icons";
 import React from "react";
+import { Wallet } from "../icons/Wallet";
 
 type ConnectWalletProps = {
   onClick?: ClickHandler;
