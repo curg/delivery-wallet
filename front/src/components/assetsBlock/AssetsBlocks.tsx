@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import IconByToken from "./IconByToken";
 import { Assets } from "./UserAssetContainer";
 import ApproveModal from "../modals";
@@ -12,12 +12,17 @@ const AssetsBlocks = ({
 }: Assets) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  useEffect(() => {}, [isOpen]);
+  const handleIsOpen = (state: boolean) => {
+    console.log(`prev-isOpen : ${isOpen} -> next-isOpen : ${state}`);
+    setIsOpen(state);
+  };
 
   return (
     <div
       onClick={() => {
-        if (setIsOpen) setIsOpen(true);
+        if (setIsOpen && isOpen === false) {
+          setIsOpen(true);
+        }
       }}
       className="w-full flex rounded-md px-8 py-2 hover:bg-gray-100 hover:cursor-pointer"
     >
@@ -41,7 +46,7 @@ const AssetsBlocks = ({
           }}
         >
           <ApproveModal
-            setIsOpen={setIsOpen}
+            setIsOpen={handleIsOpen}
             ticker={ticker}
             network={network}
             amount={amount}
