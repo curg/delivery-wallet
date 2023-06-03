@@ -1,6 +1,6 @@
 import React from 'react'
 import IconByToken from './IconByToken'
-import { Assets } from './UserAssets'
+import { Assets } from './UserAssetContainer'
 
 const AssetsBlocks = ({ ticker, network, ammount }: Assets) => {
   return (
