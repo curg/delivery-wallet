@@ -2,7 +2,9 @@ package curg.ethseoul023.Domain;
 
 public class Approve {
 
-    private Wallet user;
+    private String eoaAddress;
     private int chainIdx;
-    String tokenAddress;
+    private String amount;
+    private String tokenAddress;
+
 }

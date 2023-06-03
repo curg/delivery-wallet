@@ -7,5 +7,4 @@ import lombok.Setter;
 public class Wallet {
     private String eoaAddress;
     private String aaAddress;
-
 }
