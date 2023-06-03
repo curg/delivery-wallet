@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 public class WalletController {
 
@@ -14,7 +16,7 @@ public class WalletController {
     private WalletService walletService;
 
     @GetMapping("/getAddress")
-    public String getAddress(String _eoaAddress)
+    public Optional<String> getAddress(String _eoaAddress)
     {
         return walletService.getAAbyEOA(_eoaAddress);
     }
