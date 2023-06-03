@@ -28,11 +28,18 @@ const config: HardhatUserConfig = {
     localhost: {
       url: 'http://127.0.0.1:8545',
     },
+    goerli: {
+      url: process.env.GOERLI_ENDPOINT_URL || '',
+      accounts:
+        process.env.WALLET_TESTNET_PRIVATE_KEY !== undefined
+          ? [process.env.WALLET_TESTNET_PRIVATE_KEY]
+          : [],
+    },
     mumbai: {
       url: process.env.MUMBAI_ENDPOINT_URL || '',
       accounts:
-        process.env.WALLET_MUMBAI_PRIVATE_KEY !== undefined
-          ? [process.env.WALLET_MUMBAI_PRIVATE_KEY]
+        process.env.WALLET_TESTNET_PRIVATE_KEY !== undefined
+          ? [process.env.WALLET_TESTNET_PRIVATE_KEY]
           : [],
     },
   },

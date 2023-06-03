@@ -1,5 +1,23 @@
 {
-  "name": "hardhat-project",
+  "name": "delivery-wallet-contract",
+  "version": "0.1.0",
+  "description": "Delivery Wallet suport to transfer from assets of eoa to acount abstration wallet",
+  "scripts": {
+    "build": "npx hardhat compile",
+    "test": "npx hardhat test"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "Delivery Wallet",
+    "solidity",
+    "contract",
+    "Account Abstraction"
+  ],
+  "autor": "CURG <curg.in.seoul@gmail.com>",
+  "licesnse": "MIT License",
   "devDependencies": {
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/providers": "^5.7.2",
