@@ -1,3 +1,4 @@
+import Recoil from "@/components/Recoil";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
@@ -10,9 +11,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
+        <Recoil>
+          <Header />
           {children}
-        <Footer />
+          <Footer />
+        </Recoil>
       </body>
     </html>
   );
