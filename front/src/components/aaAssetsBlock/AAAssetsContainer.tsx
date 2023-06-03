@@ -55,7 +55,7 @@ const AAAssetsContainer = () => {
   };
 
   return (
-    <div className="min-h-[450px] mt-8 flex justify-center items-center rounded-lg bg-purple-50">
+    <div className="min-h-[450px] mt-3 flex justify-center items-center rounded-lg bg-purple-50">
       <div className="text-white">{shortenAddress(aaWalletAddress)}</div>
       {aaWalletAddress === "" && (
         <ConnectWallet
