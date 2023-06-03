@@ -31,6 +31,7 @@ const AAAssetsContainer = () => {
       }),
     });
 
+    console.log("fetchResult", fetchResult);
     return fetchResult;
   }, [eoaWalletAddress, aaWalletAddress]);
 
@@ -57,7 +58,7 @@ const AAAssetsContainer = () => {
   };
 
   return (
-    <div className="w-full h-[60vh] mt-3 rounded-lg bg-purple-50 px-4 relative">
+    <div className="w-full h-[50vh] mt-3 rounded-lg bg-purple-50 px-4">
       <div className="w-full flex justify-between items-center">
         <div className="text-white flex items-center">
           <p className="mr-2 font-semibold">Address: </p>
@@ -73,6 +74,7 @@ const AAAssetsContainer = () => {
           </div>
         </div>
       </div>
+
       {aaWalletAddress === "" && (
         <ConnectWallet
           onClick={handleCreateWallet}
@@ -83,7 +85,7 @@ const AAAssetsContainer = () => {
         <AAAssetsBlocks
           ticker={"CURG"}
           network={"CURG"}
-          amount={20}
+          amount={20.13}
           tokenId={1}
           tokenAddress={"1234"}
         />
