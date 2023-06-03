@@ -1,1 +1,5 @@
 export const BASE_URL = "http://13.208.176.199:8080";
+
+export const SPENDER_ADDRESS = "0x49c57c70912BD12304A70D494007320BecfDAAca";
+
+export const ERC20_DECIMAL = 18;

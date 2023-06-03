@@ -1,33 +1,78 @@
 "use client"; // this is a client component 👈🏽
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import IconByToken from "../assetsBlock/IconByToken";
 import Loading from "../Loading/loading";
+import { ethers } from "ethers";
+import { BASE_URL, ERC20_DECIMAL, SPENDER_ADDRESS } from "@/constants";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isTransferAtom, walletStateAtom } from "@/states/globalAtom";
 interface ModalProps {
   ticker: string;
   network: string;
   amount: number;
   tokenId: number;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  tokenAddress: string;
+  setIsOpen: (state: boolean) => void;
 }
 
 const ApproveModal = ({
   setIsOpen,
   ticker,
-  network,
   amount,
   tokenId,
+  tokenAddress,
 }: ModalProps) => {
   const [inputValue, setInputValue] = useState(0);
   const [loading, setLoading] = useState(false);
   const [balance, setBalance] = useState(0);
+  const setIsTransfer = useSetRecoilState(isTransferAtom);
 
-  const handleApprove = () => {
+  const { eoaWalletAddress } = useRecoilValue(walletStateAtom);
+
+  const tokenAbi = [
+    "function approve(address spender, uint256 amount) public returns(bool)",
+  ];
+  const { ethereum } = window;
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  const signer = provider.getSigner();
+
+  const tokenContract = new ethers.Contract(tokenAddress, tokenAbi, signer);
+
+  const amountToApprove = ethers.utils.parseUnits(
+    amount.toString(),
+    ERC20_DECIMAL
+  );
+
+  const handleCancel = async () => {
+    console.log("clicked cancel");
+    setIsOpen(false);
+  };
+
+  const handleApprove = async () => {
+    await tokenContract.approve(SPENDER_ADDRESS, amountToApprove);
+
     setLoading(true);
     setIsOpen(false);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+
+    console.log(
+      await fetch(`${BASE_URL}/approve`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          eoaAddress: eoaWalletAddress,
+          chainIdx: 1,
+          amount: amountToApprove.toString(),
+          tokenAddress: tokenId,
+        }),
+      })
+    );
+
+    setIsTransfer(true);
+    setLoading(false);
   };
+
   const getAccountBalance = async () => {
     return amount; // replace with actual balance
   };
@@ -61,17 +106,16 @@ const ApproveModal = ({
   const ApproveBtnClass = `rounded-lg text-black bg-yellow-50 w-full px-2 py-2 hover:bg-purple-200 hover:cursor-pointer duration-10 `;
   const CancelBtnClass = `rounded-lg text-white bg-purple-100 w-1/3 px-2 py-2 mx-2 hover:bg-purple-200 hover:text-purple-100 hover:cursor-pointer duration-100`;
 
-  const tokenAmount = 100.0;
-  const formattedNumber = tokenAmount?.toLocaleString(undefined, {
+  const formattedNumber = amount?.toLocaleString(undefined, {
     minimumFractionDigits: 6,
     maximumFractionDigits: 6,
   });
 
   return (
-    <form className="fixed w-full h-screen bg-white bg-opacity-70 top-0 left-0 select-none">
+    <div className="fixed w-full h-screen bg-white bg-opacity-70 top-0 left-0 select-none">
       <div className="w-full h-full relative">
         <div
-          onBlur={() => setIsOpen(false)}
+          // onBlur={() => setIsOpen(false)}
           className="z-50 w-[500px] h-[300px] bg-[#8247E5] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-xl animate-slideDownModal px-8"
         >
           <div className="w-full pt-4 pb-2">
@@ -113,7 +157,7 @@ const ApproveModal = ({
             </button>
           </div>
           <div className={BtnContainerClass}>
-            <button className={CancelBtnClass} onClick={() => setIsOpen(false)}>
+            <button className={CancelBtnClass} onClick={handleCancel}>
               Cancel
             </button>
             <button className={ApproveBtnClass} onClick={handleApprove}>
@@ -123,7 +167,7 @@ const ApproveModal = ({
         </div>
         {loading && <Loading />}
       </div>
-    </form>
+    </div>
   );
 };
 
