@@ -1,15 +1,13 @@
-import React from 'react'
-import { Ethereum, Polygon, USDC, USDT } from '@/components/icons'
+import { Ethereum, Polygon, USDC, USDT } from "@/components/icons";
+import ConnectWallet from "@/components/buttons/ConnectWallet";
+import React from "react";
 
 const Test = () => {
   return (
     <div>
-      <Ethereum className='' />
-      <Polygon className='' />
-      <USDC className='' />
-      <USDT className='' />
+      <ETH className="" />
     </div>
-  )
-}
+  );
+};
 
-export default Test
+export default Test;
