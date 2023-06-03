@@ -13,21 +13,36 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-      transparent: "transparent",
-      purple: {
-        50: "#8247E5",
-        100: "#6B26DF",
+        transparent: "transparent",
+        purple: {
+          50: "#8247E5",
+          100: "#6B26DF",
+        },
+        yellow: {
+          50: "#FFF613",
+        },
+        dark: {
+          50: "#AAAAAA",
+          100: "#888888",
+          150: "#555555",
+          200: "#222222",
+        },
       },
-      yellow: {
-        50: "#FFF613",
+      keyframes: {
+        slideDownModal: {
+          from : { 
+            transform: 'translate(-50%, -100%)', 
+            opacity: 0
+          },
+          to : { 
+            transform: 'translate(-50%, -50%)',
+            opacity: 1
+          }
+        }
       },
-      dark: {
-        50: "#AAAAAA",
-        100: "#888888",
-        150: "#555555",
-        200: "#222222",
-      },
-    }
+      animation: {
+        slideDownModal: 'slideDownModal .4s ease forwards'
+      }
     },
   },
 
