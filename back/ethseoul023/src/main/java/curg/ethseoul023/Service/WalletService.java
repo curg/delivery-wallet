@@ -1,15 +1,17 @@
 package curg.ethseoul023.Service;
 
 import curg.ethseoul023.Domain.Asset;
+import curg.ethseoul023.Repository.ChainRepository;
 import curg.ethseoul023.Repository.MemoryRepository;
 import curg.ethseoul023.Repository.MongoDBRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class WalletService {
@@ -19,6 +21,9 @@ public class WalletService {
 
     @Autowired
     private MemoryRepository memoryRepository;
+
+    @Autowired
+    private ChainRepository chainRepository;
 
     public String getAAbyEOA(String eoa) {
         return memoryRepository.getAddress(eoa);
@@ -57,4 +62,9 @@ public class WalletService {
         return l;
     }
 
+    public String test() throws IOException, ExecutionException, InterruptedException {
+        return chainRepository.call(
+                "0x4A18B1D7eFe1177020868583b168AA4045efDbAE",
+                "0x08fbCc35b21C519724982632f1FE410EaC0838F4");
+    }
 }

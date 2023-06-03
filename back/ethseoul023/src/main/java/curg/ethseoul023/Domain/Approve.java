@@ -10,5 +10,4 @@ public class Approve {
     private int chainIdx; // 1 2 3
     private String amount; // 양
     private int tokenIdx;
-
 }
