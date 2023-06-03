@@ -6,7 +6,7 @@ import Profile from "../buttons/Profile";
 import Chevron from "../icons/Chevron";
 
 const Header = () => {
-  const { connected, address } = useConnectWallet();
+  const { isConnected, walletAddress } = useConnectWallet();
 
   const handleConnectWallet = async () => {
     try {
@@ -26,11 +26,11 @@ const Header = () => {
         </div>
         <div className="w-auto">
           <div className="flex flex-wrap items-center">
-            {connected ? (
+            {isConnected ? (
               <div className="flex items-center w-auto py-3 px-6 rounded-3xl border-[1px] border-black">
                 <Profile />
                 <p className=" mx-3 font-heading text-lg">
-                  Address : {shortenAddress(address)}
+                  Address : {shortenAddress(walletAddress)}
                 </p>
                 <Chevron className="" />
               </div>
