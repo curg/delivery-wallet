@@ -5,7 +5,9 @@
   "scripts": {
     "build": "npx hardhat compile; cp artifacts/contracts/DeliveryWallet.sol/DeliveryWallet.json ./abi/",
     "test": "npx hardhat test",
-    "clean": "npx hardhat clean"
+    "clean": "npx hardhat clean",
+    "deploy:goerli": "npx hardhat run scripts/deploy.ts --network goerli",
+    "deploy:mumbai": "npx hardhat run scripts/deploy.ts --network mumbai"
   },
   "repository": {
     "type": "git",
