@@ -7,6 +7,7 @@ export type Assets = {
   network: string;
   amount: number;
   tokenId: number;
+  tokenAddress: string;
 };
 
 type Props = {
@@ -34,6 +35,7 @@ const UserAssetContainer = ({ assets }: Props) => {
             network={asset.network}
             amount={asset.amount}
             tokenId={asset.tokenId}
+            tokenAddress={asset.tokenAddress}
           />
         );
       })}

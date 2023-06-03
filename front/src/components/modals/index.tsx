@@ -2,32 +2,75 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import IconByToken from "../assetsBlock/IconByToken";
 import Loading from "../Loading/loading";
+import { ethers } from "ethers";
+import { ERC20_DECIMAL, SPENDER_ADDRESS } from "@/constants";
 interface ModalProps {
   ticker: string;
   network: string;
   amount: number;
   tokenId: number;
+  tokenAddress: string;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const ApproveModal = ({
   setIsOpen,
   ticker,
-  network,
   amount,
   tokenId,
+  tokenAddress,
 }: ModalProps) => {
   const [inputValue, setInputValue] = useState(0);
   const [loading, setLoading] = useState(false);
   const [balance, setBalance] = useState(0);
 
-  const handleApprove = () => {
+  // async function approveTokens() {
+  //   // Step 1: Connect to the user's Metamask wallet
+  //   await window.ethereum.enable();
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //   const signer = provider.getSigner();
+
+  //   // Step 2: Create a contract instance representing the token
+  //   const tokenAddress = '0xYourTokenAddressHere';
+  //   const tokenContract = new ethers.Contract(tokenAddress, tokenAbi, signer);
+
+  //   // Step 3: Call the approve function on the contract instance
+  //   const spenderAddress = '0xSpenderAddressHere';
+  //   const amountToApprove = ethers.utils.parseUnits('100.0', 18); // replace '100.0' with the number of tokens to approve, and '18' with the token's number of decimals
+  //   const tx = await tokenContract.approve(spenderAddress, amountToApprove);
+
+  //   // Wait for the transaction to be mined
+  //   const receipt = await tx.wait();
+  //   console.log('Transaction was mined in block', receipt.blockNumber);
+  // }
+
+  const tokenAbi = [
+    "function approve(address spender, uint256 amount) public returns(bool)",
+  ];
+  const { ethereum } = window;
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  const signer = provider.getSigner();
+
+  const tokenContract = new ethers.Contract(tokenAddress, tokenAbi, signer);
+
+  const amountToApprove = ethers.utils.parseUnits(
+    amount.toString(),
+    ERC20_DECIMAL
+  );
+
+  const handleApprove = async () => {
+    console.log(await tokenContract.approve(SPENDER_ADDRESS, amountToApprove));
+    console.log("Approve", tokenId, ticker, amount);
+
+    // console.log("approveTx", approveTx);
+
     setLoading(true);
     setIsOpen(false);
     setTimeout(() => {
       setLoading(false);
     }, 3000);
   };
+
   const getAccountBalance = async () => {
     return amount; // replace with actual balance
   };
@@ -61,8 +104,7 @@ const ApproveModal = ({
   const ApproveBtnClass = `rounded-lg text-black bg-yellow-50 w-full px-2 py-2 hover:bg-purple-200 hover:cursor-pointer duration-10 `;
   const CancelBtnClass = `rounded-lg text-white bg-purple-100 w-1/3 px-2 py-2 mx-2 hover:bg-purple-200 hover:text-purple-100 hover:cursor-pointer duration-100`;
 
-  const tokenAmount = 100.0;
-  const formattedNumber = tokenAmount?.toLocaleString(undefined, {
+  const formattedNumber = amount?.toLocaleString(undefined, {
     minimumFractionDigits: 6,
     maximumFractionDigits: 6,
   });
@@ -71,7 +113,7 @@ const ApproveModal = ({
     <form className="fixed w-full h-screen bg-white bg-opacity-70 top-0 left-0 select-none">
       <div className="w-full h-full relative">
         <div
-          onBlur={() => setIsOpen(false)}
+          // onBlur={() => setIsOpen(false)}
           className="z-50 w-[500px] h-[300px] bg-[#8247E5] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-xl animate-slideDownModal px-8"
         >
           <div className="w-full pt-4 pb-2">

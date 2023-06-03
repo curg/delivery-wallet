@@ -3,7 +3,13 @@ import IconByToken from "./IconByToken";
 import { Assets } from "./UserAssetContainer";
 import ApproveModal from "../modals";
 
-const AssetsBlocks = ({ ticker, network, amount, tokenId }: Assets) => {
+const AssetsBlocks = ({
+  ticker,
+  network,
+  amount,
+  tokenId,
+  tokenAddress,
+}: Assets) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {}, [isOpen]);
@@ -40,6 +46,7 @@ const AssetsBlocks = ({ ticker, network, amount, tokenId }: Assets) => {
             network={network}
             amount={amount}
             tokenId={tokenId}
+            tokenAddress={tokenAddress}
           />
         </div>
       ) : (
