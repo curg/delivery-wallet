@@ -1,13 +1,11 @@
 "use client"; // this is a client component 👈🏽
 import React, { Dispatch, SetStateAction, useState } from "react";
 import AssetsBlocks from "./AssetsBlocks";
-import { Modal } from "../modals";
 
 export type Assets = {
   ticker: string;
   network: string;
   amount: number;
-  setIsOpen?: Dispatch<SetStateAction<boolean>>;
 };
 
 type Props = {
@@ -15,10 +13,8 @@ type Props = {
 };
 
 const UserAssetContainer = ({ assets }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <div className="min-h-[500px] mt-8 border rounded-lg">
+    <div className="min-h-[500px] mt-8 border rounded-lg relative">
       <div className="flex justify-between items-center p-5 text-gray-400">
         <p className="text-sm">Chain</p>
         <div className="text-xs">
@@ -29,18 +25,16 @@ const UserAssetContainer = ({ assets }: Props) => {
           <span>NFTs</span>
         </div>
       </div>
-      {assets?.map((assets, idx) => {
+      {assets?.map((asset, idx) => {
         return (
           <AssetsBlocks
             key={idx}
-            ticker={assets.ticker}
-            network={assets.network}
-            amount={assets.amount}
-            setIsOpen={setIsOpen}
+            ticker={asset.ticker}
+            network={asset.network}
+            amount={asset.amount}
           />
         );
       })}
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };
