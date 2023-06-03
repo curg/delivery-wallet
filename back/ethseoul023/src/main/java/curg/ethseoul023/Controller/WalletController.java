@@ -37,8 +37,8 @@ public class WalletController {
         return walletService.addAddress(form.getEoaAddress(),form.getAaAddress());
     }
 
-//    @GetMapping("/asset")
-//    public List<Asset> getAsset(@RequestParam String address, int chainIdx){
-//        return walletService.getAsset(address,chainIdx);
-//    }
+    @GetMapping("/asset")
+    public List<Asset> getAsset(@RequestParam String address, int chainIdx) throws ExecutionException, InterruptedException {
+        return walletService.getAssets(address,chainIdx);
+    }
 }
