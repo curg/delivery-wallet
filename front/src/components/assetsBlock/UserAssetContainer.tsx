@@ -6,8 +6,8 @@ export type Assets = {
   ticker: string;
   network: string;
   amount: number;
-  tokenId: number;
-  tokenAddress: string;
+  tokenId?: number;
+  tokenAddress?: string;
 };
 
 type Props = {

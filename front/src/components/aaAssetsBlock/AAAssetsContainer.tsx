@@ -12,6 +12,7 @@ import {
 import { getSimpleAccount } from "@/api/wallet/getSimpleAccount";
 import { BASE_URL } from "@/constants";
 import { shortenAddress } from "@/utils/shortenAddress";
+import AAAssetsBlocks from "./AAAssetsBlocks";
 
 const AAAssetsContainer = () => {
   const [{ eoaWalletAddress, aaWalletAddress, signingKey }, setWalletState] =
@@ -63,6 +64,7 @@ const AAAssetsContainer = () => {
           content="Create AA Wallet"
         />
       )}
+      <AAAssetsBlocks ticker={"CURG"} network={"CURG"} amount={20} />
     </div>
   );
 };
