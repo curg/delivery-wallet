@@ -1,6 +1,18 @@
+"use client"
 import React from 'react'
+import { useConnectWallet } from '@/hooks/useConnectWallet';
+import { usePathname, useRouter } from 'next/navigation'
+import { useEffect } from 'react';
 
 const Home = () => {
+  const { isConnected } = useConnectWallet();
+  const path = usePathname();
+  const router = useRouter();
+  useEffect(() => {
+    if (isConnected && path === '/home') {
+      router.push("/")
+    }
+  }, [path])
   return (
     <div className='w-4/5 mx-auto mt-32'>
       <div className='w-1/2 ml-8 font-semibold min-w-[500px]'>
