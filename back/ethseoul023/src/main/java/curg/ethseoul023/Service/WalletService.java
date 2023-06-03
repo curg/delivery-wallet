@@ -36,8 +36,11 @@ public class WalletService {
         Wallet wallet = new Wallet();
         wallet.setEoaAddress(eoa);
         wallet.setAaAddress(aa);
-        mongoDBRepository.insert(wallet);
-        return aa;
+        if (getAAbyEOA(eoa)==""){
+            mongoDBRepository.insert(wallet);
+            return aa;
+        }
+        return "false";
     }
     public List<String> getAssets(String owner, int chainIdx) throws ExecutionException, InterruptedException, IOException {
         List<String> list = new ArrayList<>();
