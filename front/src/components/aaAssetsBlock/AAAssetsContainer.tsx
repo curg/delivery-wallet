@@ -11,6 +11,7 @@ import {
 } from "@/api/wallet/config/constants";
 import { getSimpleAccount } from "@/api/wallet/getSimpleAccount";
 import { BASE_URL } from "@/constants";
+import { shortenAddress } from "@/utils/shortenAddress";
 
 const AAAssetsContainer = () => {
   const [{ eoaWalletAddress, aaWalletAddress, signingKey }, setWalletState] =
@@ -55,7 +56,13 @@ const AAAssetsContainer = () => {
 
   return (
     <div className="min-h-[450px] mt-8 flex justify-center items-center rounded-lg bg-purple-50">
-      <ConnectWallet onClick={handleCreateWallet} content="Create AA Wallet" />
+      <div className="text-white">{shortenAddress(aaWalletAddress)}</div>
+      {aaWalletAddress === "" && (
+        <ConnectWallet
+          onClick={handleCreateWallet}
+          content="Create AA Wallet"
+        />
+      )}
     </div>
   );
 };
