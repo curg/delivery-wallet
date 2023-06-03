@@ -13,7 +13,7 @@ const ConnectWallet = ({ onClick }: ConnectWalletProps) => {
       className=" bg-dark-200 items-center flex rounded-3xl py-3 px-10"
     >
       <Wallet className="" />
-      <p className="ml-2 text-white">Connect</p>
+      <p className="ml-2 text-white">Connect Wallet</p>
     </button>
   );
 };
