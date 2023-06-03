@@ -2,7 +2,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import AssetsBlocks from "./AssetsBlocks";
 import { Modal } from "../modals";
-
+import { dummyAssets } from "./dummy";
 export type Assets = {
   ticker: string;
   network: string;
@@ -40,6 +40,7 @@ const UserAssetContainer = ({ assets }: Props) => {
           />
         );
       })}
+
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
