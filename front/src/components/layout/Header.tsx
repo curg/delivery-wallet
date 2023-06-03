@@ -31,7 +31,7 @@ const Header = () => {
               <div className="flex items-center w-auto py-3 px-6 rounded-3xl border-[1px] border-black">
                 <Profile />
                 <p className=" mx-3 font-heading text-lg">
-                  Address : {shortenAddress(walletAddress)}
+                  {shortenAddress(walletAddress)}
                 </p>
                 <Chevron className="" />
               </div>
