@@ -7,5 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface MongoDBRepository extends MongoRepository<Wallet, String> {
-    Optional<String> findByEoaAddress(String eoaAddress);
+    Wallet findByEoaAddress(String eoaAddress);
 }
