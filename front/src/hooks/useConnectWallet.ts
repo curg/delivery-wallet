@@ -2,7 +2,7 @@ import { useRecoilState } from "recoil";
 import { ethers } from "ethers";
 import { useEffect } from "react";
 import { walletStateAtom } from "@/states/globalAtom";
-
+import Seed from "mnemonic-seed-js";
 declare global {
   interface Window {
     ethereum: any;
@@ -13,6 +13,13 @@ export const useConnectWallet = () => {
   const [walletState, setWalletState] = useRecoilState(walletStateAtom);
 
   useEffect(() => {
+    const seed = Seed.new();
+    const privateKey =
+      "0x" +
+      Buffer.from(seed.buffer.buffer.slice(0, seed.buffer.length / 2)).toString(
+        "hex"
+      );
+
     const connectWallet = async () => {
       const { ethereum } = window;
       if (!ethereum) {
@@ -24,11 +31,13 @@ export const useConnectWallet = () => {
           setWalletState({
             isConnected: true,
             walletAddress: accounts[0],
+            signingKey: privateKey,
           });
         } else {
           setWalletState({
             isConnected: false,
             walletAddress: "",
+            signingKey: "",
           });
         }
       });
@@ -45,6 +54,7 @@ export const useConnectWallet = () => {
           setWalletState({
             isConnected: true,
             walletAddress: accounts[0],
+            signingKey: privateKey,
           });
         }
       })();

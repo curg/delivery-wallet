@@ -1,5 +1,7 @@
 import { useMutation } from "react-query";
 import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { walletStateAtom } from "@/states/globalAtom";
 
 const fetchAddress = async (signingKey: string) => {
   const { data } = await axios.post("/api/wallet", {
@@ -9,6 +11,7 @@ const fetchAddress = async (signingKey: string) => {
 };
 
 const CreateWallet = () => {
+  const { signingKey: privateKey } = useRecoilValue(walletStateAtom);
   const mutation = useMutation(fetchAddress, {
     onSuccess: (data) => {
       console.log(`SimpleAccount address: ${data.SimpleAccountAddress}`);
@@ -19,7 +22,7 @@ const CreateWallet = () => {
   });
 
   const handleClick = () => {
-    const signingKey = "your_signing_key_here"; // replace this with the actual signing key
+    const signingKey = privateKey; // replace this with the actual signing key
     mutation.mutate(signingKey);
   };
 

@@ -5,6 +5,7 @@ export const walletStateAtom = atom({
   default: {
     isConnected: false,
     walletAddress: "",
+    signingKey: "",
   },
 });
 

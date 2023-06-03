@@ -4,7 +4,6 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import CustomModal from "./Modal";
 import IconByToken from "../assetsBlock/IconByToken";
 import Loading from "../Loading/loading";
-
 interface ModalProps {
   ticker: string;
   network: string;
