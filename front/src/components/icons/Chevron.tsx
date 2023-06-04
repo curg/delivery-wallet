@@ -1,8 +1,6 @@
-
-
 export type ChevronIconProps = {
   className: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const Chevron = ({ className, ...rest }: ChevronIconProps) => (

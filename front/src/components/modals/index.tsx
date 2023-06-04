@@ -7,6 +7,7 @@ import { BASE_URL, ERC20_DECIMAL, SPENDER_ADDRESS } from "@/constants";
 
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isTransferAtom, walletStateAtom } from "@/states/globalAtom";
+
 interface ModalProps {
   ticker: string;
   network: string;
@@ -20,7 +21,6 @@ const ApproveModal = ({
   setIsOpen,
   ticker,
   amount,
-  tokenId,
   tokenAddress,
 }: ModalProps) => {
   const [inputValue, setInputValue] = useState(0);

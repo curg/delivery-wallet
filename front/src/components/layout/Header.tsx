@@ -82,38 +82,48 @@ const Header = () => {
   ];
 
   return (
-
-    <section className="overflow-hidden w-4/5 mx-auto">
-      {/* ... existing code ... */}
-      {isConnected ? (
-        <div className="flex items-center w-auto py-3 px-6 rounded-3xl border-[1px] border-black">
-          <Profile />
-          <p className=" mx-3 font-heading text-lg">
-            {shortenAddress(walletAddress)}
-          </p>
-          <Chevron
-            onClick={() => setShowNetworks(!showNetworks)}
-            className="m-2 w-6 h-[100px]"
-          />
-          {showNetworks && (
-            <div className="mt-[150px] ml-11 absolute bg-white rounded-md shadow-lg">
-              {networks.map((network) => (
-                <div
-                  key={network.chainId}
-                  onClick={() => handleNetworkSwitch(network)}
-                  className="p-2 hover:bg-gray-200 cursor-pointer"
-                >
-                  {network.name}
-                </div>
-              ))}
-            </div>
-          )}
-
+    <section className="w-full py-1 px-28 mx-auto bg-black">
+      <div className={`flex items-center justify-between`}>
+        <div className="w-auto">
+          <div className="flex flex-wrap items-center">
+            <Logo />
+          </div>
         </div>
-      ) : (
-        <ConnectWallet onClick={handleConnectWallet} content="Connect Wallet" />
-      )}
-      {/* ... existing code ... */}
+        <div className="w-auto">
+          <div className="flex flex-wrap items-center">
+            {isConnected ? (
+              <div className="flex items-center w-auto py-3 px-6 rounded-3xl border-[1px] border-black bg-white">
+                <Profile />
+                <p className=" mx-3 font-heading text-lg">
+                  {shortenAddress(walletAddress)}
+                </p>
+                <Chevron
+                  onClick={() => setShowNetworks(!showNetworks)}
+                  className="m-2 w-6 h-[100px]"
+                />
+                {showNetworks && (
+                  <div className="mt-[150px] ml-11 absolute bg-white rounded-md shadow-lg">
+                    {networks.map((network) => (
+                      <div
+                        key={network.chainId}
+                        onClick={() => handleNetworkSwitch(network)}
+                        className="p-2 hover:bg-gray-200 cursor-pointer"
+                      >
+                        {network.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <ConnectWallet
+                onClick={handleConnectWallet}
+                content="Connect Wallet"
+              />
+            )}
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
