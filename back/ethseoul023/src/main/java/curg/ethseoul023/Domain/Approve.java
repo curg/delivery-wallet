@@ -10,5 +10,4 @@ public class Approve {
     private int chainIdx;
     private String amount;
     private String tokenAddress;
-
 }

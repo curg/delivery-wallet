@@ -24,19 +24,29 @@ public class WalletService {
     @Autowired
     private ChainRepository chainRepository;
 
+    public boolean isExistAA(String eoa) {
+        Optional<Wallet> wallet = mongoDBRepository.findByEoaAddress(eoa);
+        if (wallet.isPresent()) {
+            return true;
+        }
+        return false;
+    }
+
     public String getAAbyEOA(String eoa) {
         Optional<Wallet> wallet = mongoDBRepository.findByEoaAddress(eoa);
         if (wallet.isPresent()) {
             return wallet.get().getAaAddress();
         }
-        return "";
+        return "null";
     }
 
     public String addAddress(String eoa,String aa){
         Wallet wallet = new Wallet();
+
+        eoa = eoa.toLowerCase();
         wallet.setEoaAddress(eoa);
         wallet.setAaAddress(aa);
-        if (getAAbyEOA(eoa)==""){
+        if (isExistAA(eoa)==false){
             mongoDBRepository.insert(wallet);
             return aa;
         }

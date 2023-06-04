@@ -5,10 +5,7 @@ import curg.ethseoul023.Domain.Asset;
 import curg.ethseoul023.Domain.Wallet;
 import curg.ethseoul023.Service.WalletService;
 //import curg.ethseoul023.Domain.Asset;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
 import java.io.IOException;
@@ -32,9 +29,9 @@ public class WalletController {
     }
 
     @PostMapping("/addAddress")
-    public String addAddress(Wallet form)
+    public String addAddress(@RequestBody Wallet wallet)
     {
-        return walletService.addAddress(form.getEoaAddress(),form.getAaAddress());
+        return walletService.addAddress(wallet.getEoaAddress(), wallet.getAaAddress());
     }
 
     @GetMapping("/asset")

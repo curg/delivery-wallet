@@ -2,6 +2,7 @@ package curg.ethseoul023.Service;
 
 import curg.ethseoul023.Domain.Approve;
 import curg.ethseoul023.Domain.Wallet;
+import curg.ethseoul023.Dto.ApproveReturnDto;
 import curg.ethseoul023.Repository.MongoDBRepository;
 import org.springframework.data.util.Pair;
 import org.springframework.http.ResponseEntity;
@@ -74,7 +75,10 @@ public class ApproveService {
         return "0x000";
     }
 
-    public Pair<Boolean, String> executeTransfer(@RequestBody Approve _approve) throws Exception {
+
+    public ApproveReturnDto executeTransfer(@RequestBody Approve _approve) throws Exception {
+
+        ApproveReturnDto returnDto = new ApproveReturnDto();
 
         String eoaAddress = _approve.getEoaAddress();
         int chainIdx = _approve.getChainIdx();
@@ -91,12 +95,14 @@ public class ApproveService {
         String toAddress = IsExistaaAddress(eoaAddress); // aa 컨트랙트 주소
         if (toAddress == null) {
             System.out.println("지갑을 못찾았습니다");
-            return Pair.of(false, "No EOA Wallet");
+            returnDto.setTxHash("null");
+            returnDto.setResult("지갑을 못찾았습니다");
+            return returnDto;
         }
 
         EthGetTransactionCount ethGetTransactionCount = web3j.ethGetTransactionCount(credentials.getAddress(), DefaultBlockParameterName.LATEST).send();
         BigInteger nonce = ethGetTransactionCount.getTransactionCount();
-        BigInteger amountToSend = BigInteger.valueOf(Long.parseLong(amount)); // you can provide yourself how much you want to send
+        BigInteger amountToSend = new BigInteger(amount); // you can provide yourself how much you want to send
 
         Function function = new Function(
                 "deliveryTokenAssets",
@@ -112,11 +118,18 @@ public class ApproveService {
         String hexValue = Numeric.toHexString(signedMessage);
         EthSendTransaction ethSendTransaction = web3j.ethSendRawTransaction(hexValue).sendAsync().get();
         String transactionHash = ethSendTransaction.getTransactionHash();
-//        System.out.println(transactionHash);
+        System.out.println(transactionHash);
         if (transactionHash == null) {
-            return Pair.of(false, ethSendTransaction.getError().toString());
+            returnDto.setResult("가스비가 부족합니다");
+            returnDto.setTxHash("null");
+            return returnDto;
+        } else if (ethSendTransaction.getError() != null) {
+            returnDto.setResult(ethSendTransaction.getError().toString());
+            returnDto.setTxHash("null");
         }
-        return Pair.of(true, transactionHash);
+        returnDto.setResult("true");
+        returnDto.setTxHash(transactionHash);
+        return returnDto;
     }
 
 }

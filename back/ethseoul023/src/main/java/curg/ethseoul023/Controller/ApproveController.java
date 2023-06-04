@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,8 +20,7 @@ public class ApproveController {
     }
 
     @PostMapping("/approve")
-    public Pair<Boolean, String>signalApprove(Approve _approve) throws Exception {
-        ApproveReturnDto returnDto = new ApproveReturnDto();
+    public ApproveReturnDto signalApprove(@RequestBody Approve _approve) throws Exception {
         return approveService.executeTransfer(_approve);
     }
 }
