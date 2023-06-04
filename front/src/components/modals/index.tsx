@@ -61,11 +61,6 @@ const ApproveModal = ({
     setLoading(true);
     setIsOpen(false);
 
-    console.log(
-      "eoaWalletAddress.toLowerCase()",
-      eoaWalletAddress.toLowerCase()
-    );
-
     const result = await fetch(`${BASE_URL}/approve`, {
       method: "POST",
       headers: {

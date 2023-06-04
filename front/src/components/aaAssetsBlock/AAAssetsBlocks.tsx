@@ -11,7 +11,6 @@ const AAAssetsBlocks = ({ ticker, network, amount }: Assets) => {
       </div>
       <div className="w-1/2 flex justify-end items-center">
         <p className="text-md font-medium">{amount?.toString()}</p>
-
         <p className="text-md ml-2">{ticker}</p>
       </div>
     </div>

@@ -2,7 +2,7 @@ export const assets = [
   {
     ticker: "CURG",
     network: "CURG",
-    amount: 20.13,
+    amount: 20,
     tokenId: 1,
     tokenAddress: "0xB186887176E450bFfc03697b0684347f3f346F3D",
   },

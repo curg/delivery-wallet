@@ -39,7 +39,8 @@ const AssetsBlocks = ({
         ) : (
           <>
             <p className="text-md font-medium">
-              {amount?.toString().split(".")[0]}.
+              {amount?.toString().split(".")[0]}
+              {ticker === "CURG" && isTransfer === false ? "" : "."}
             </p>
             <p className="text-sm text-gray-400">
               {amount?.toString().split(".")[1]}
