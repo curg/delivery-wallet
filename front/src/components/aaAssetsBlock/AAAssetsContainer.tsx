@@ -13,6 +13,7 @@ import { getSimpleAccount } from "@/api/wallet/getSimpleAccount";
 import { BASE_URL } from "@/constants";
 import { shortenAddress } from "@/utils/shortenAddress";
 import AAAssetsBlocks from "./AAAssetsBlocks";
+import { Wallet } from "../icons/Wallet";
 
 const AAAssetsContainer = () => {
   const [{ eoaWalletAddress, aaWalletAddress, signingKey }, setWalletState] =
@@ -31,7 +32,6 @@ const AAAssetsContainer = () => {
           aaAddress: address,
         }),
       });
-      console.log("aaWalletAddress", address);
 
       console.log("fetchResult", fetchResult);
       return fetchResult;
@@ -80,10 +80,13 @@ const AAAssetsContainer = () => {
       </div>
 
       {aaWalletAddress === "" && (
-        <ConnectWallet
+        <button
           onClick={handleCreateWallet}
-          content="Create AA Wallet"
-        />
+          className=" mt-20 bg-dark-200 items-center flex rounded-3xl py-3 px-6 mx-auto"
+        >
+          <Wallet className="" />
+          <p className="ml-2 text-white">Create AA Wallet</p>
+        </button>
       )}
 
       {isTransfer && (
