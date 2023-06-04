@@ -33,6 +33,8 @@ export const useConnectWallet = () => {
             eoaWalletAddress: accounts[0],
             signingKey: privateKey,
             aaWalletAddress: "",
+            networkId: "0x5",
+            networkName: "georil Testnet",
           });
         } else {
           setWalletState({
@@ -40,6 +42,8 @@ export const useConnectWallet = () => {
             eoaWalletAddress: "",
             signingKey: "",
             aaWalletAddress: "",
+            networkId: "",
+            networkName: "",
           });
         }
       });
@@ -58,6 +62,8 @@ export const useConnectWallet = () => {
             eoaWalletAddress: accounts[0],
             signingKey: privateKey,
             aaWalletAddress: "",
+            networkId: "0x5",
+            networkName: "georil Testnet",
           });
         }
       })();

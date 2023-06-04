@@ -9,14 +9,18 @@ export const assets = [
   {
     ticker: "USDT",
     network: "USDT",
+
     amount: 120.12,
+
     tokenId: 2,
     tokenAddress: "0x0d1FCB66050EE7a14FF4B9a2bf499f521BbA41bD",
   },
   {
     ticker: "WBTC",
     network: "WBTC",
+
     amount: 94.29,
+
     tokenId: 3,
     tokenAddress: "0xac5058E9Ac8b8aD7A7B765E360FfA7943F530be5",
   },
@@ -24,6 +28,7 @@ export const assets = [
     ticker: "DAI",
     network: "DAI",
     amount: 342.23,
+
     tokenId: 4,
     tokenAddress: "0x236F53345F541c755DF70988C7E8e4b658B820aA",
   },

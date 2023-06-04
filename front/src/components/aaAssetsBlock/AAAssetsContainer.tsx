@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ConnectWallet from "../buttons/ConnectWallet";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { isTransferAtom, walletStateAtom } from "@/states/globalAtom";
@@ -18,22 +18,7 @@ const AAAssetsContainer = () => {
   const [{ eoaWalletAddress, aaWalletAddress, signingKey }, setWalletState] =
     useRecoilState(walletStateAtom);
   const isTransfer = useRecoilValue(isTransferAtom);
-
-  const postWalletAddress = useCallback(async () => {
-    const fetchResult = await fetch(`${BASE_URL}/addAddress`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        eoaAddress: eoaWalletAddress,
-        aaAddress: aaWalletAddress,
-      }),
-    });
-
-    console.log("fetchResult", fetchResult);
-    return fetchResult;
-  }, [eoaWalletAddress, aaWalletAddress]);
+  const [addresss, setAddress] = useState("");
 
   const handleCreateWallet = async () => {
     try {
@@ -45,17 +30,42 @@ const AAAssetsContainer = () => {
         simpleAccountFactory
       );
       const address = await accountAPI.getCounterFactualAddress();
-
-      setWalletState((prevState) => ({
+      if (address) {
+        setAddress(address);
+      }
+      await setWalletState((prevState) => ({
         ...prevState,
         aaWalletAddress: address,
       }));
 
       await postWalletAddress();
+      console.log(aaWalletAddress, "AA");
     } catch (error) {
       console.log("Error creating wallet");
     }
   };
+  const postWalletAddress = useCallback(async () => {
+    const fetchResult = await fetch(`${BASE_URL}/addAddress`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        eoaAddress: eoaWalletAddress,
+        aaAddress: addresss,
+      }),
+    });
+    console.log(addresss, "AA123");
+    return fetchResult;
+  }, [addresss, eoaWalletAddress]);
+  useEffect(() => {
+    setWalletState((prevState) => ({
+      ...prevState,
+      aaWalletAddress: addresss,
+    }));
+    setAddress(addresss);
+    console.log(addresss, "addresss");
+  }, [addresss, setWalletState]);
 
   return (
     <div className="w-full h-[50vh] mt-3 rounded-lg bg-purple-50 px-4">

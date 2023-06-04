@@ -7,6 +7,8 @@ export const walletStateAtom = atom({
     eoaWalletAddress: "",
     signingKey: "",
     aaWalletAddress: "",
+    networkId: "0x5",
+    networkName: "goerli Testnet",
   },
 });
 
