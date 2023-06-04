@@ -65,7 +65,7 @@ const ApproveModal = ({
           eoaAddress: eoaWalletAddress,
           chainIdx: 1,
           amount: amountToApprove.toString(),
-          tokenAddress: tokenId,
+          tokenAddress: "0xB186887176E450bFfc03697b0684347f3f346F3D",
         }),
       })
     );
