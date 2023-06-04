@@ -94,7 +94,7 @@ const Header = () => {
             {isConnected ? (
               <div className="flex items-center w-auto py-3 px-6 rounded-3xl border-[1px] border-black bg-white">
                 <Profile />
-                <p className=" mx-3 font-heading text-lg">
+                <p className=" mx-3 font-heading text-base">
                   {shortenAddress(walletAddress)}
                 </p>
                 <Chevron

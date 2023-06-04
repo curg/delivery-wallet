@@ -1,8 +1,11 @@
 "use client";
 import React, { useCallback } from "react";
-import ConnectWallet from "../buttons/ConnectWallet";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { isTransferAtom, walletStateAtom } from "@/states/globalAtom";
+import {
+  isTransferAtom,
+  txHashAtom,
+  walletStateAtom,
+} from "@/states/globalAtom";
 import { ethers } from "ethers";
 import {
   entryPoint,
@@ -19,6 +22,7 @@ const AAAssetsContainer = () => {
   const [{ eoaWalletAddress, aaWalletAddress, signingKey }, setWalletState] =
     useRecoilState(walletStateAtom);
   const isTransfer = useRecoilValue(isTransferAtom);
+  const txHash = useRecoilValue(txHashAtom);
 
   const postWalletAddress = useCallback(
     async (address: string) => {
@@ -78,7 +82,6 @@ const AAAssetsContainer = () => {
           </div>
         </div>
       </div>
-
       {aaWalletAddress === "" && (
         <button
           onClick={handleCreateWallet}
@@ -88,15 +91,22 @@ const AAAssetsContainer = () => {
           <p className="ml-2 text-white">Create AA Wallet</p>
         </button>
       )}
-
       {isTransfer && (
-        <AAAssetsBlocks
-          ticker={"CURG"}
-          network={"CURG"}
-          amount={20.13}
-          tokenId={1}
-          tokenAddress={"1234"}
-        />
+        <>
+          <AAAssetsBlocks
+            ticker={"CURG"}
+            network={"CURG"}
+            amount={20.13}
+            tokenId={1}
+            tokenAddress={"1234"}
+          />
+          <div className="text-white text-right text-sm">
+            Tx Hash :{" "}
+            {shortenAddress(
+              "0x4527e2918b345e2f4b3afe9c1c1cf72f4c61252198db7150c1c0a3a24ffbd4c7"
+            )}
+          </div>
+        </>
       )}
     </div>
   );

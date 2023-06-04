@@ -5,8 +5,12 @@ import Loading from "../Loading/loading";
 import { ethers } from "ethers";
 import { BASE_URL, ERC20_DECIMAL, SPENDER_ADDRESS } from "@/constants";
 
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isTransferAtom, walletStateAtom } from "@/states/globalAtom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  isTransferAtom,
+  txHashAtom,
+  walletStateAtom,
+} from "@/states/globalAtom";
 
 interface ModalProps {
   ticker: string;
@@ -26,6 +30,8 @@ const ApproveModal = ({
   const [inputValue, setInputValue] = useState(0);
   const [loading, setLoading] = useState(false);
   const [balance, setBalance] = useState(0);
+  const [txHash, setTxHash] = useRecoilState(txHashAtom);
+
   const setIsTransfer = useSetRecoilState(isTransferAtom);
 
   const { eoaWalletAddress } = useRecoilValue(walletStateAtom);
@@ -56,20 +62,30 @@ const ApproveModal = ({
     setIsOpen(false);
 
     console.log(
-      await fetch(`${BASE_URL}/approve`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          eoaAddress: eoaWalletAddress,
-          chainIdx: 1,
-          amount: amountToApprove.toString(),
-          tokenAddress: "0xB186887176E450bFfc03697b0684347f3f346F3D",
-        }),
-      })
+      "eoaWalletAddress.toLowerCase()",
+      eoaWalletAddress.toLowerCase()
     );
 
+    const result = await fetch(`${BASE_URL}/approve`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        eoaAddress: eoaWalletAddress.toLowerCase(),
+        chainIdx: 1,
+        amount: amountToApprove.toString(),
+        tokenAddress: "0xB186887176E450bFfc03697b0684347f3f346F3D",
+      }),
+    });
+
+    console.log("result", result);
+    console.log("result.json()", await result.json());
+
+    const data: any = await result;
+    console.log("data", data);
+
+    setTxHash(data?.txHash);
     setIsTransfer(true);
     setLoading(false);
   };

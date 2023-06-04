@@ -27,7 +27,7 @@ const AssetsBlocks = ({
           setIsOpen(true);
         }
       }}
-      className="w-full flex rounded-md px-8 py-2 hover:bg-gray-100 hover:cursor-pointer"
+      className="w-full flex rounded-md px-8 py-3 hover:bg-gray-100 hover:cursor-pointer border-x-2/3 border-b-[1px] border-dark-50"
     >
       <div className="w-1/2 flex justify-start items-center">
         <IconByToken ticker={ticker} />
@@ -35,9 +35,7 @@ const AssetsBlocks = ({
       </div>
       <div className="w-1/2 flex justify-end items-center">
         {ticker === "CURG" && isTransfer === true ? (
-          <>
-            <p className="text-md font-medium">0</p>
-          </>
+          <p className="text-md font-medium">0</p>
         ) : (
           <>
             <p className="text-md font-medium">
