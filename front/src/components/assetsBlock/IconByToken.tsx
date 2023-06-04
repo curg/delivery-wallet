@@ -1,7 +1,5 @@
 import React from "react";
-import { DAI, Ethereum, Polygon, USDC, USDT } from "../icons";
-import { CURG } from "../icons/CURG";
-import { WBTC } from "../icons/WBTC";
+import { DAI, Ethereum, Polygon, USDC, USDT, CURG, WBTC } from "../icons";
 
 type Prop = {
   ticker: string;
@@ -38,19 +36,19 @@ const IconByToken = ({ ticker }: Prop) => {
         <div>
           <CURG className="" />
         </div>
-      )
+      );
     case "WBTC":
       return (
         <div>
           <WBTC className="" />
         </div>
-      )
+      );
     case "DAI":
       return (
         <div>
           <DAI className="" />
         </div>
-      )
+      );
     default:
       return <div>Nothing</div>;
   }
