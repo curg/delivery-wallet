@@ -75,12 +75,28 @@ const ApproveModal = ({
     });
 
     console.log("result", result);
-    console.log("result.json()", await result.json());
 
-    const data: any = await result;
-    console.log("data", data);
+    interface MyObj {
+      txHash: string;
+      result: string;
+    }
 
-    setTxHash(data?.txHash);
+    const parseResponse = async (response: Response): Promise<MyObj | null> => {
+      try {
+        const responseJson: MyObj = await response.json();
+
+        return responseJson;
+      } catch (error) {
+        console.log("error", error);
+        return null;
+      }
+    };
+
+    let data: MyObj | null = await parseResponse(result);
+
+    console.log("Tx Hash:", data?.txHash);
+
+    setTxHash(data?.txHash || "");
     setIsTransfer(true);
     setLoading(false);
   };
@@ -173,7 +189,7 @@ const ApproveModal = ({
               Cancel
             </button>
             <button className={ApproveBtnClass} onClick={handleApprove}>
-              Approve
+              Transfer
             </button>
           </div>
         </div>

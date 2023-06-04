@@ -1,7 +1,11 @@
 "use client";
 import React, { useCallback } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { isTransferAtom, walletStateAtom } from "@/states/globalAtom";
+import {
+  isTransferAtom,
+  txHashAtom,
+  walletStateAtom,
+} from "@/states/globalAtom";
 import { ethers } from "ethers";
 import {
   entryPoint,
@@ -18,6 +22,7 @@ const AAAssetsContainer = () => {
   const [{ eoaWalletAddress, aaWalletAddress, signingKey }, setWalletState] =
     useRecoilState(walletStateAtom);
   const isTransfer = useRecoilValue(isTransferAtom);
+  const txHash = useRecoilValue(txHashAtom);
 
   const postWalletAddress = useCallback(
     async (address: string) => {
@@ -65,17 +70,9 @@ const AAAssetsContainer = () => {
       <div className="w-full flex justify-between items-center">
         <div className="text-white flex items-center">
           <p className="mr-2 font-semibold">Address: </p>
-          {shortenAddress(aaWalletAddress)}
+          {aaWalletAddress}
         </div>
-        <div className="flex justify-between items-center p-5 text-gray-400">
-          <div className="text-xs">
-            <span className=" text-white">All</span>
-            <span className="mx-4 text-white">/</span>
-            <span className=" text-white">Token</span>
-            <span className="mx-4 text-white">/</span>
-            <span className=" text-white">NFTs</span>
-          </div>
-        </div>
+        <div className="flex justify-between items-center p-5 text-gray-400"></div>
       </div>
       {aaWalletAddress === "" && (
         <button
@@ -95,11 +92,9 @@ const AAAssetsContainer = () => {
             tokenId={1}
             tokenAddress={"1234"}
           />
-          <div className="text-white text-right text-sm">
-            Tx Hash :{" "}
-            {shortenAddress(
-              "0x4527e2918b345e2f4b3afe9c1c1cf72f4c61252198db7150c1c0a3a24ffbd4c7"
-            )}
+          <div className="text-white text-right text-sm flex justify-end">
+            <p className=" font-semibold">Tx Hash </p>:{" "}
+            {shortenAddress(txHash || "")}
           </div>
         </>
       )}
