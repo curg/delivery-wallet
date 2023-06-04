@@ -19,21 +19,25 @@ const AAAssetsContainer = () => {
     useRecoilState(walletStateAtom);
   const isTransfer = useRecoilValue(isTransferAtom);
 
-  const postWalletAddress = useCallback(async () => {
-    const fetchResult = await fetch(`${BASE_URL}/addAddress`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        eoaAddress: eoaWalletAddress,
-        aaAddress: aaWalletAddress,
-      }),
-    });
+  const postWalletAddress = useCallback(
+    async (address: string) => {
+      const fetchResult = await fetch(`${BASE_URL}/addAddress`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          eoaAddress: eoaWalletAddress,
+          aaAddress: address,
+        }),
+      });
+      console.log("aaWalletAddress", address);
 
-    console.log("fetchResult", fetchResult);
-    return fetchResult;
-  }, [eoaWalletAddress, aaWalletAddress]);
+      console.log("fetchResult", fetchResult);
+      return fetchResult;
+    },
+    [eoaWalletAddress]
+  );
 
   const handleCreateWallet = async () => {
     try {
@@ -51,7 +55,7 @@ const AAAssetsContainer = () => {
         aaWalletAddress: address,
       }));
 
-      await postWalletAddress();
+      await postWalletAddress(address);
     } catch (error) {
       console.log("Error creating wallet");
     }
@@ -91,7 +95,6 @@ const AAAssetsContainer = () => {
           tokenAddress={"1234"}
         />
       )}
-
     </div>
   );
 };
