@@ -15,7 +15,7 @@ CURG AA-Lounge Team 6 Participating Team Members
 
 - [Choo Scott](https://github.com/scottXchoo)
 - [Kevin Ha](https://github.com/onlyhyde)
-- [James Lee](https://github.com/hereokay)
+- [Hereokay](https://github.com/hereokay)
 - [JaeHun Lee](https://github.com/Resister-boy)
 - [MinWoo Nam](https://github.com/minwoogramer)
 - [JungHoon Koh](https://github.com/kjh24871)
